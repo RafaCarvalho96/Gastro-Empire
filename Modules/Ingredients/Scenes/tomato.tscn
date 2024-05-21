@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpnraua64ssvo"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient_node.gd" id="1_gd33t"]
+[ext_resource type="PackedScene" uid="uid://crukb0oomk2tk" path="res://Assets/Restaurant Models/food_ingredient_tomato.gltf" id="2_37kid"]
+[ext_resource type="Resource" uid="uid://cq0xyp3wlu15f" path="res://Modules/Ingredients/Resources/tomato.tres" id="2_t23vw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h8p82"]
+size = Vector3(0.75, 0.710083, 0.75)
+
+[node name="Tomato" type="Node3D" node_paths=PackedStringArray("shape")]
+script = ExtResource("1_gd33t")
+ingredientResource = ExtResource("2_t23vw")
+shape = NodePath("RigidBody3D/CollisionShape3D")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+
+[node name="food_ingredient_tomato2" parent="RigidBody3D" instance=ExtResource("2_37kid")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.355042, 0)
+shape = SubResource("BoxShape3D_h8p82")

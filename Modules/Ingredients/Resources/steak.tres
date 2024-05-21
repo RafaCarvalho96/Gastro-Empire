@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=6 format=3 uid="uid://d0d0lfhroy712"]
+
+[ext_resource type="Resource" uid="uid://chp5knc0kia0e" path="res://Modules/Ingredients/Resources/steak_pieces.tres" id="1_o2hsn"]
+[ext_resource type="Script" path="res://Modules/Ingredients/cooking_detail.gd" id="2_4cks0"]
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="3_p0heu"]
+
+[sub_resource type="Resource" id="Resource_dmvm5"]
+script = ExtResource("2_4cks0")
+action = 0
+timer = 3
+result = ExtResource("1_o2hsn")
+burn = false
+
+[sub_resource type="Resource" id="Resource_kjy7r"]
+script = ExtResource("2_4cks0")
+action = 1
+timer = 0
+burn = false
+
+[resource]
+script = ExtResource("3_p0heu")
+id = "steak"
+name = "Filé"
+isPlateable = false
+platePriority = 0
+loadCookingDetails = Array[ExtResource("2_4cks0")]([SubResource("Resource_dmvm5"), SubResource("Resource_kjy7r")])

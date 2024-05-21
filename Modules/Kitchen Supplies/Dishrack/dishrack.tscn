@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://17732ato5r0a"]
+
+[ext_resource type="Script" path="res://Modules/Kitchen Supplies/Dishrack/dishrack.gd" id="1_qj8vq"]
+[ext_resource type="PackedScene" uid="uid://cy08ynqf1xbcq" path="res://Assets/Restaurant Models/dishrack.gltf" id="2_qqawu"]
+[ext_resource type="PackedScene" uid="uid://bdrc80k8g2sof" path="res://Modules/InteractiveArea/interactive_area.tscn" id="3_3vsc4"]
+[ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="4_w4fce"]
+[ext_resource type="PackedScene" uid="uid://wqnhx35ledfx" path="res://Modules/Kitchen Supplies/Plate/plate.tscn" id="5_mlt2k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndoyw"]
+size = Vector3(1.21802, 1.08658, 1.2113)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1lqe1"]
+size = Vector3(1.2, 3, 1.2)
+
+[node name="Dishrack" type="Node3D" node_paths=PackedStringArray("attachable1", "attachable2", "attachable3", "attachable4")]
+script = ExtResource("1_qj8vq")
+attachable1 = NodePath("Attachable1")
+attachable2 = NodePath("Attachable2")
+attachable3 = NodePath("Attachable3")
+attachable4 = NodePath("Attachable4")
+
+[node name="Body" type="StaticBody3D" parent="."]
+
+[node name="dishrack2" parent="Body" instance=ExtResource("2_qqawu")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00353974, 0.539932, -0.0105591)
+shape = SubResource("BoxShape3D_ndoyw")
+
+[node name="InteractableArea" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_3vsc4")]
+priority = 6
+parent = NodePath("..")
+interactivePriority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133671, 0.720703, -0.0173645)
+shape = SubResource("BoxShape3D_1lqe1")
+
+[node name="Attachable1" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_w4fce")]
+transform = Transform3D(1, 0, 0, 0, 0.0988855, -0.995099, 0, 0.995099, 0.0988855, 0, 0.658387, -0.409525)
+parent = NodePath("..")
+
+[node name="Attachable2" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_w4fce")]
+transform = Transform3D(1, 0, 0, 0, 0.0988855, -0.995099, 0, 0.995099, 0.0988855, 0, 0.658387, -0.169751)
+parent = NodePath("..")
+
+[node name="Attachable3" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_w4fce")]
+transform = Transform3D(1, 0, 0, 0, 0.0988855, -0.995099, 0, 0.995099, 0.0988855, 0, 0.658387, 0.0137552)
+parent = NodePath("..")
+
+[node name="Attachable4" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_w4fce")]
+transform = Transform3D(1, 0, 0, 0, 0.0988855, -0.995099, 0, 0.995099, 0.0988855, 0, 0.658387, 0.202337)
+parent = NodePath("..")
+
+[node name="Plate" parent="." instance=ExtResource("5_mlt2k")]
+
+[node name="Plate2" parent="." instance=ExtResource("5_mlt2k")]

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=6 format=3 uid="uid://cq0xyp3wlu15f"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/cooking_detail.gd" id="1_je3gw"]
+[ext_resource type="Resource" uid="uid://dtti2qrysqbcg" path="res://Modules/Ingredients/Resources/tomato_slice.tres" id="1_lceap"]
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="3_0i6j2"]
+
+[sub_resource type="Resource" id="Resource_dmvm5"]
+script = ExtResource("1_je3gw")
+action = 0
+timer = 2
+result = ExtResource("1_lceap")
+burn = false
+
+[sub_resource type="Resource" id="Resource_kjy7r"]
+script = ExtResource("1_je3gw")
+action = 1
+timer = 0
+burn = false
+
+[resource]
+script = ExtResource("3_0i6j2")
+id = "tomato"
+name = "Tomate"
+isPlateable = false
+platePriority = 1
+loadCookingDetails = Array[ExtResource("1_je3gw")]([SubResource("Resource_dmvm5"), SubResource("Resource_kjy7r")])

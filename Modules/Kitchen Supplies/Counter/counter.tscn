@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://buwpp3mwa7wm3"]
+
+[ext_resource type="Script" path="res://Modules/Kitchen Supplies/Counter/counter.gd" id="1_a3svp"]
+[ext_resource type="PackedScene" uid="uid://doiwuyoc2qlw1" path="res://Assets/Restaurant Models/kitchencounter_straight_A.gltf" id="1_j5fx2"]
+[ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="2_lyluv"]
+[ext_resource type="Script" path="res://Modules/InteractiveArea/interactive_area.gd" id="4_nih1d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypdhb"]
+size = Vector3(1.99078, 1.00397, 1.97314)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lmnpm"]
+size = Vector3(1.98431, 2, 2)
+
+[node name="Counter" type="Node3D"]
+script = ExtResource("1_a3svp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="kitchencounter_straight_A2" parent="StaticBody3D" instance=ExtResource("1_j5fx2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00863647, 0.493256, -0.0178223)
+shape = SubResource("BoxShape3D_ypdhb")
+
+[node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_lyluv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00762, 0)
+parent = NodePath("..")
+
+[node name="InteractableArea" type="Area3D" parent="." node_paths=PackedStringArray("parent")]
+priority = 1
+script = ExtResource("4_nih1d")
+parent = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00497437, 0.989685, 0.00244306)
+shape = SubResource("BoxShape3D_lmnpm")

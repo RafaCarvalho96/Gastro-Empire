@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkb5etb2ii1w"]
+
+[ext_resource type="Script" path="res://Modules/Attachable/attachable.gd" id="1_50iu3"]
+
+[node name="Attachable" type="Node3D"]
+script = ExtResource("1_50iu3")
+
+[node name="Attach Point" type="Marker3D" parent="."]

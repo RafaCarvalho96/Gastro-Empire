@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://bq7crnpf06yuy"]
+
+[ext_resource type="PackedScene" uid="uid://d4hav0y0htb1i" path="res://Assets/Restaurant Models/floor_kitchen.gltf" id="1_om65g"]
+[ext_resource type="PackedScene" uid="uid://dfbof8a8bje6k" path="res://Modules/Kitchen Supplies/Fridge/Fridge.tscn" id="7_knexk"]
+[ext_resource type="PackedScene" uid="uid://buwpp3mwa7wm3" path="res://Modules/Kitchen Supplies/Counter/counter.tscn" id="8_5mfeh"]
+[ext_resource type="PackedScene" uid="uid://ps7164kllg8d" path="res://Modules/Kitchen Supplies/Sink/sink.tscn" id="8_m4iwr"]
+[ext_resource type="PackedScene" uid="uid://bu6ql3jn42jg8" path="res://Modules/Player/player.tscn" id="8_w4n64"]
+[ext_resource type="PackedScene" uid="uid://vpnp0wkabunf" path="res://Modules/Kitchen Supplies/Crates/crate_tomato.tscn" id="9_m7lbl"]
+[ext_resource type="PackedScene" uid="uid://djn8kejdlnx38" path="res://Modules/Kitchen Supplies/Stove/stove.tscn" id="9_rmd66"]
+[ext_resource type="PackedScene" uid="uid://cb7l5vey7sfit" path="res://Modules/Kitchen Supplies/CuttingBoard/cutting_board.tscn" id="9_u53b5"]
+[ext_resource type="PackedScene" uid="uid://17732ato5r0a" path="res://Modules/Kitchen Supplies/Dishrack/dishrack.tscn" id="10_5ddqk"]
+[ext_resource type="PackedScene" uid="uid://bbeo8nttobfob" path="res://Modules/Kitchen Supplies/Crates/crate_steak.tscn" id="11_1w8k1"]
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 18, 0)
+
+[node name="Player" parent="." instance=ExtResource("8_w4n64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="floor_kitchen2" parent="Floor" instance=ExtResource("1_om65g")]
+
+[node name="floor_kitchen4" parent="Floor" instance=ExtResource("1_om65g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_kitchen5" parent="Floor" instance=ExtResource("1_om65g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="floor_kitchen6" parent="Floor" instance=ExtResource("1_om65g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="floor_kitchen7" parent="Floor" instance=ExtResource("1_om65g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="floor_kitchen3" parent="Floor" instance=ExtResource("1_om65g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Kitchen Supplies" type="Node3D" parent="."]
+
+[node name="Fridge" parent="Kitchen Supplies" instance=ExtResource("7_knexk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.529588, -5)
+
+[node name="Counter" parent="Kitchen Supplies" instance=ExtResource("8_5mfeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -5)
+
+[node name="Counter4" parent="Kitchen Supplies" instance=ExtResource("8_5mfeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -5)
+
+[node name="Counter3" parent="Kitchen Supplies" instance=ExtResource("8_5mfeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -5)
+
+[node name="Counter2" parent="Kitchen Supplies" instance=ExtResource("8_5mfeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -5)
+
+[node name="Sink" parent="Kitchen Supplies" instance=ExtResource("8_m4iwr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, -5)
+
+[node name="CrateTomato" parent="Kitchen Supplies" instance=ExtResource("9_m7lbl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, -1)
+
+[node name="CuttingBoard" parent="Kitchen Supplies" instance=ExtResource("9_u53b5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, -5)
+
+[node name="Stove" parent="Kitchen Supplies" instance=ExtResource("9_rmd66")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, -5)
+
+[node name="Crate Steak" parent="Kitchen Supplies" instance=ExtResource("11_1w8k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -1)
+
+[node name="Dishrack" parent="Kitchen Supplies" instance=ExtResource("10_5ddqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, -5)

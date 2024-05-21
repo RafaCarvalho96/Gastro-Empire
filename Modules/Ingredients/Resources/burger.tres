@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=5 format=3 uid="uid://cwl13cc5hfdcw"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/cooking_detail.gd" id="1_7avdd"]
+[ext_resource type="Resource" uid="uid://c0qc0egtniaxq" path="res://Modules/Ingredients/Resources/burned_burger.tres" id="1_ap30b"]
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="2_hxnnm"]
+
+[sub_resource type="Resource" id="Resource_q2g1x"]
+script = ExtResource("1_7avdd")
+action = 2
+timer = 3
+result = ExtResource("1_ap30b")
+burn = true
+
+[resource]
+script = ExtResource("2_hxnnm")
+id = "burger"
+name = "Hamburguer"
+isPlateable = true
+platePriority = 0
+loadCookingDetails = Array[ExtResource("1_7avdd")]([SubResource("Resource_q2g1x")])

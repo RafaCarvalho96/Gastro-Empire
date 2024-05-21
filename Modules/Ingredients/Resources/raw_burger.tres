@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=6 format=3 uid="uid://ixay1i023wc3"]
+
+[ext_resource type="Resource" uid="uid://cwl13cc5hfdcw" path="res://Modules/Ingredients/Resources/burger.tres" id="1_b7mfc"]
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="1_osc5g"]
+[ext_resource type="Script" path="res://Modules/Ingredients/cooking_detail.gd" id="1_vgod5"]
+
+[sub_resource type="Resource" id="Resource_mnl4u"]
+script = ExtResource("1_vgod5")
+action = 2
+timer = 5
+result = ExtResource("1_b7mfc")
+burn = false
+
+[sub_resource type="Resource" id="Resource_wkeja"]
+script = ExtResource("1_vgod5")
+action = 1
+timer = 0
+burn = false
+
+[resource]
+script = ExtResource("1_osc5g")
+id = "raw_burger"
+name = "Hamburguer Cru"
+isPlateable = false
+platePriority = 0
+loadCookingDetails = Array[ExtResource("1_vgod5")]([SubResource("Resource_mnl4u"), SubResource("Resource_wkeja")])

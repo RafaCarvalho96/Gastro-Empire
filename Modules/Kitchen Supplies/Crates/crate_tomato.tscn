@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://vpnp0wkabunf"]
+
+[ext_resource type="PackedScene" uid="uid://dlan7yrpq18df" path="res://Assets/Restaurant Models/crate_tomatoes.gltf" id="1_mfl5p"]
+[ext_resource type="Script" path="res://Modules/Kitchen Supplies/Crates/crate.gd" id="1_pgu14"]
+[ext_resource type="PackedScene" uid="uid://bdrc80k8g2sof" path="res://Modules/InteractiveArea/interactive_area.tscn" id="2_d7tfv"]
+[ext_resource type="Resource" uid="uid://cq0xyp3wlu15f" path="res://Modules/Ingredients/Resources/tomato.tres" id="2_n3i1l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_irt74"]
+size = Vector3(2.03491, 0.907288, 2.01733)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fw0ct"]
+size = Vector3(2.00543, 2, 1.98926)
+
+[node name="CrateTomato" type="Node3D"]
+script = ExtResource("1_pgu14")
+ingredient = ExtResource("2_n3i1l")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="crate_tomatoes2" parent="StaticBody3D" instance=ExtResource("1_mfl5p")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00427246, 0.453705, -0.0045166)
+shape = SubResource("BoxShape3D_irt74")
+
+[node name="InteractableArea" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_d7tfv")]
+parent = NodePath("..")
+interactivePriority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00814819, 1, 0.0161133)
+shape = SubResource("BoxShape3D_fw0ct")

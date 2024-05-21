@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=2 format=3 uid="uid://c0qc0egtniaxq"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="3_hnevp"]
+
+[resource]
+script = ExtResource("3_hnevp")
+id = "burned_burger"
+name = "Hamburguer Queimado"
+isPlateable = false
+platePriority = 0
+loadCookingDetails = Array[Resource("res://Modules/Ingredients/cooking_detail.gd")]([])

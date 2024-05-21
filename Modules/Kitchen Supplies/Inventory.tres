@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://tmfhmxmwnbaj"]
+
+[ext_resource type="Script" path="res://Modules/Kitchen Supplies/Inventory.gd" id="1_sorib"]
+
+[resource]
+script = ExtResource("1_sorib")
+maxStoredTypes = 1
+maxStoredAmount = 1
+content = {}

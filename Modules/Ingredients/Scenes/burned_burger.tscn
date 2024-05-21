@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk4xeto0jmy7f"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient_node.gd" id="1_ntlfb"]
+[ext_resource type="Resource" uid="uid://c0qc0egtniaxq" path="res://Modules/Ingredients/Resources/burned_burger.tres" id="2_nqldk"]
+[ext_resource type="PackedScene" uid="uid://6siljfnx7b55" path="res://Assets/Restaurant Models/food_ingredient_burger_trash.gltf" id="3_pocv5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h8p82"]
+size = Vector3(0.75, 0.23584, 0.75)
+
+[node name="Burned Burger" type="Node3D" node_paths=PackedStringArray("shape")]
+script = ExtResource("1_ntlfb")
+ingredientResource = ExtResource("2_nqldk")
+shape = NodePath("RigidBody3D/CollisionShape3D")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+
+[node name="food_ingredient_burger_trash2" parent="RigidBody3D" instance=ExtResource("3_pocv5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11792, 0)
+shape = SubResource("BoxShape3D_h8p82")

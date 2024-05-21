@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://pjytmdep8bb0"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient_node.gd" id="1_e3s4c"]
+[ext_resource type="Resource" uid="uid://d0d0lfhroy712" path="res://Modules/Ingredients/Resources/steak.tres" id="2_w7bab"]
+[ext_resource type="PackedScene" uid="uid://b2ove0kupiqy7" path="res://Assets/Restaurant Models/food_ingredient_steak.gltf" id="3_u62wc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h8p82"]
+size = Vector3(0.75, 0.710083, 0.75)
+
+[node name="Steak" type="Node3D" node_paths=PackedStringArray("shape")]
+script = ExtResource("1_e3s4c")
+ingredientResource = ExtResource("2_w7bab")
+shape = NodePath("RigidBody3D/CollisionShape3D")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+
+[node name="food_ingredient_steak2" parent="RigidBody3D" instance=ExtResource("3_u62wc")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.355042, 0)
+shape = SubResource("BoxShape3D_h8p82")

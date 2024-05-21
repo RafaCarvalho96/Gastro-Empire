@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=4 format=3 uid="uid://dtti2qrysqbcg"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/cooking_detail.gd" id="1_ynt3l"]
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="2_1redu"]
+
+[sub_resource type="Resource" id="Resource_kjy7r"]
+script = ExtResource("1_ynt3l")
+action = 1
+timer = 0
+burn = false
+
+[resource]
+script = ExtResource("2_1redu")
+id = "tomato_slice"
+name = "Fatia de Tomate"
+isPlateable = true
+platePriority = 0
+loadCookingDetails = Array[ExtResource("1_ynt3l")]([SubResource("Resource_kjy7r")])
