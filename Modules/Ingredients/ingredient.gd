@@ -18,3 +18,7 @@ func loadDetails():
 
 func hasAction(action: IngredientManager.CookingAction) -> bool:
 	return cookingDetails.has(action)
+
+
+func getActionDetail(action: IngredientManager.CookingAction) -> CookingDetail:
+	return cookingDetails.get(action)

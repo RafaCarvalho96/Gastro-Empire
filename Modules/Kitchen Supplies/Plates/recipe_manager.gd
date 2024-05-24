@@ -16,8 +16,8 @@ func checkRecipes(plate: Plate) -> String:
 		for attachable: AttachablePoint in plate.attachables:
 			var ing = attachable.getAttached()
 			if ing != null:
-				if remaining.has(ing.ingredientResource.id):
-					remaining.erase(ing.ingredientResource.id)
+				if remaining.has(ing.getResource().id):
+					remaining.erase(ing.getResource().id)
 				else:
 					break
 		if remaining.size() < 1:

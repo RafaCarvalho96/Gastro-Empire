@@ -19,11 +19,11 @@ func _on_interact(player: Player):
 			openGui(player)
 			return
 		
-		if not object.ingredientResource.hasAction(IngredientManager.CookingAction.FREEZE):
+		if not object.getResource().hasAction(IngredientManager.CookingAction.FREEZE):
 			openGui(player)
 			return
 		
-		var amtReturned = inv.store(object.ingredientResource.id,1)
+		var amtReturned = inv.store(object.getResource().id,1)
 		if amtReturned == 0:
 			player.attachable.deattachAndRemove()
 		return

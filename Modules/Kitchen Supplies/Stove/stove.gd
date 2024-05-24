@@ -38,10 +38,10 @@ func _on_interact(player: Player):
 	
 	if not player.attachable.canAttach() and not attachable.canAttach():
 		if player.attachable.getAttached() is Plate and attachable.getAttached() is IngredientNode:
-			if attachable.getAttached().ingredientResource.isPlateable and player.attachable.getAttached().attachable.canAttach():
+			if attachable.getAttached().getResource().isPlateable and player.attachable.getAttached().attachable.canAttach():
 				attachable.transfer(player.attachable.getAttached().attachable)
 		if player.attachable.getAttached() is IngredientNode and attachable.getAttached() is Plate:
-			if player.attachable.getAttached().ingredientResource.isPlateable and attachable.getAttached().attachable.canAttach():
+			if player.attachable.getAttached().getResource().isPlateable and attachable.getAttached().attachable.canAttach():
 				player.attachable.transfer(attachable.getAttached().attachable)
 
 
@@ -49,10 +49,10 @@ func _on_start_action(player: Player):
 	if isCooking or attachable.canAttach() or not attachable.getAttached() is IngredientNode:
 		return
 	
-	ingredient = attachable.getAttached().ingredientResource
+	ingredient = attachable.getAttached().getResource()
 	if not ingredient.hasAction(IngredientManager.CookingAction.COOK):
 		return
-	actionDetail = ingredient.cookingDetails.get(IngredientManager.CookingAction.COOK)
+	actionDetail = ingredient.getActionDetail(IngredientManager.CookingAction.COOK)
 	
 	_start_cooking(actionDetail.timer)
 
@@ -70,9 +70,9 @@ func _on_timer_timeout():
 	_stop_cooking()
 	attachable.deattachAndRemove()
 	attachable.attach(IngredientManager.getIngredientNode(actionDetail.result.id))
-	if attachable.getAttached().ingredientResource.cookingDetails.has(IngredientManager.CookingAction.COOK):
-		ingredient = attachable.getAttached().ingredientResource
-		actionDetail = ingredient.cookingDetails.get(IngredientManager.CookingAction.COOK)
+	if attachable.getAttached().getResource().hasAction(IngredientManager.CookingAction.COOK):
+		ingredient = attachable.getAttached().getResource()
+		actionDetail = ingredient.getActionDetail(IngredientManager.CookingAction.COOK)
 		_start_cooking(actionDetail.timer)
 
 

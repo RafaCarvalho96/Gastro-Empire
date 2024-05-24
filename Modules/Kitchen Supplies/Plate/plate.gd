@@ -14,10 +14,8 @@ func _ready():
 	attachable.getPoint().deattached_point.connect(_on_ingredient_deattach)
 
 
-func _on_ingredient_attach(object: IngredientNode): 
-	var shape: CollisionShape3D = object.shape
-	var boxShape: BoxShape3D = shape.shape
-	var y = boxShape.size.y / 2
+func _on_ingredient_attach(ingredientNode: IngredientNode): 
+	var y = ingredientNode.getHeight()/2
 	var newAttachable: AttachablePoint = attachablePointScene.instantiate()
 	newAttachable.parent = self
 	newAttachable.attached.connect(_on_ingredient_attach)
@@ -29,7 +27,7 @@ func _on_ingredient_attach(object: IngredientNode):
 	attachableCount += 1
 	organizePlate()
 
-func _on_ingredient_deattach(object: IngredientNode):
+func _on_ingredient_deattach(ingredientNode: IngredientNode):
 	for attch in attachables:
 		attch.queue_free()
 	attachables.clear()
@@ -44,7 +42,7 @@ func _on_ingredient_deattach(object: IngredientNode):
 
 
 func compareIngredientPriority(ingA: IngredientNode, ingB: IngredientNode):
-	return ingA.ingredientResource.platePriority > ingB.ingredientResource.platePriority
+	return ingA.getResource().platePriority > ingB.getResource().platePriority
 	
 
 

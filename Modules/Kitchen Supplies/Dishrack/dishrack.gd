@@ -17,7 +17,7 @@ func _on_interact(player: Player):
 	if player.attachable.canAttach() and hasPlate():
 		getPlate(player.attachable, false)
 		return
-	elif not player.attachable.canAttach() and player.attachable.getAttached() is IngredientNode and player.attachable.getAttached().ingredientResource.isPlateable and hasPlate():
+	elif not player.attachable.canAttach() and player.attachable.getAttached() is IngredientNode and player.attachable.getAttached().getResource().isPlateable and hasPlate():
 		getPlate(player.attachable, true)
 	elif not player.attachable.canAttach() and hasSlot():
 		storePlate(player.attachable)

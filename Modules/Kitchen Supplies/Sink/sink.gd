@@ -16,6 +16,6 @@ func _on_interact(player: Player):
 		return
 	
 	if not player.attachable.canAttach() and not attachable.canAttach() and player.attachable.getAttached() is Plate:
-		if attachable.getAttached().ingredientResource.isPlateable and player.attachable.getAttached().attachable.canAttach():
+		if attachable.getAttached().getResource().isPlateable and player.attachable.getAttached().attachable.canAttach():
 			attachable.transfer(player.attachable.getAttached().attachable)
 
