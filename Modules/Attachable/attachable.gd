@@ -1,54 +1,101 @@
 class_name Attachable extends Node3D
 
+enum ObjectCategories {UTENSIL, PLATE, INGREDIENT, FOOD}
+
 @export var parent: Node3D
-@onready var attach_point = $"Attach Point"
+@export var orderned: bool = true
 
-signal attached(object: Node3D)
-signal deattached(object: Node3D)
+signal attached(object: Node3D,point: int)
+signal deattached(object: Node3D,point: int)
 
-var hasObjectAttached: bool = false
-var object: Node3D
+var points: Dictionary = {}
+var availablePoints: Array[int] = []
+var occupiedPoints: Array[int] = []
+var pointCount: int = 0
+var pointPointer: int = 0
 
 func _ready():
 	if not parent.has_meta("attachable"):
 		parent.set_meta("attachable",self)
+	
+	pointCount = 0
+	for node: Node3D in get_children():
+		if node is AttachablePoint:
+			points[node.seqNumber] = node
+			availablePoints.push_back(node.seqNumber)
+			pointCount += 1
+	availablePoints.sort_custom(sortAsc)
+	
+	for point: AttachablePoint in points.values():
+		point.attached_point.connect(_on_point_attach)
+		point.deattached_point.connect(_on_point_deattach)
 
 
-func canAttach() -> bool:
-	return not hasObjectAttached
+func sortAsc(a,b):
+	return a<b
 
 
-func attach(obj: Node3D, silent: bool = false):
-	hasObjectAttached = true
-	if obj.is_inside_tree():
-		obj.reparent.call_deferred(self)
+func canAttach(point: int = -1) -> bool:
+	return getPoint(point).canAttach()
+
+
+func hasObject(point: int = -1) -> bool:
+	return getPoint(point).hasObject()
+
+
+func attach(obj: Node3D,point: int = -1):
+	getPoint(point).attach(obj,false)
+
+
+func transfer(newAttachable: Attachable,point: int = -1):
+	getPoint(point).transfer(newAttachable)
+
+
+func getAttached(point: int = -1) -> Node3D:
+	return getPoint(point).getAttached()
+
+
+func deattach(point: int = -1):
+	getPoint(point).deattach()
+
+
+func deattachAndRemove(point: int = -1):
+	getPoint(point).deattachAndRemove()
+
+
+func getPoint(pointSeq: int = -1) -> AttachablePoint:
+	if points.size() < 1:
+		return null
+
+	if orderned or pointSeq == -1:
+		if availablePoints.size() > 0:
+			return points[availablePoints.back()]
+		elif occupiedPoints.size() > 0:
+			return points[occupiedPoints.back()]
+
+	if not points.has(pointSeq):
+		return null
+
+	return points[pointSeq]
+
+
+func _on_point_attach(node: Node3D,point: int = -1):
+	if orderned:
+		point = availablePoints.pop_back()
+		occupiedPoints.push_back(point)
 	else:
-		add_child(obj)
-	obj.position = Vector3.ZERO
-	obj.global_position = attach_point.global_position
-	obj.global_rotation = attach_point.global_rotation
-	object = obj
-	if not silent:
-		attached.emit(object)
+		availablePoints.erase(point)
+		occupiedPoints.append(point)
+
+	attached.emit(node,point)
 
 
-func transfer(newAttachable: Attachable):
-	newAttachable.attach(object)
-	deattach()
+func _on_point_deattach(node: Node3D,point: int = -1):
+	if orderned:
+		point = occupiedPoints.pop_back()
+		availablePoints.push_back(point)
+	else:
+		occupiedPoints.erase(point)
+		availablePoints.append(point)
 
-
-func getAttached() -> Node3D:
-	return object
-
-
-func deattach():
-	deattached.emit(object)
-	object = null
-	hasObjectAttached = false
-
-
-func deattachAndRemove():
-	deattached.emit(object)
-	hasObjectAttached = false
-	object.queue_free()
-	object = null
+	deattached.emit(node,point)

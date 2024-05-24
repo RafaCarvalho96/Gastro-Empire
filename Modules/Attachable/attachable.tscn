@@ -4,5 +4,3 @@
 
 [node name="Attachable" type="Node3D"]
 script = ExtResource("1_50iu3")
-
-[node name="Attach Point" type="Marker3D" parent="."]

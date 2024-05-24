@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://djn8kejdlnx38"]
+[gd_scene load_steps=16 format=3 uid="uid://djn8kejdlnx38"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Stove/stove.gd" id="1_eepa6"]
 [ext_resource type="PackedScene" uid="uid://bkvcjxq20t56d" path="res://Assets/Restaurant Models/stove_single_countertop.gltf" id="2_mhbkc"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://1kbef66141eb" path="res://Assets/Restaurant Models/pan_B.gltf" id="3_oyrag"]
 [ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="4_v1ox7"]
 [ext_resource type="Texture2D" uid="uid://dbnobfn36boij" path="res://icon.svg" id="5_yo4cu"]
+[ext_resource type="Script" path="res://Modules/Attachable/attachable_point.gd" id="6_s2nxr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ndoyw"]
 size = Vector3(1.50073, 0.280182, 1.75061)
@@ -58,6 +59,9 @@ shape = SubResource("BoxShape3D_1lqe1")
 [node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_v1ox7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345124, 0)
 parent = NodePath("..")
+
+[node name="AttachablePoint" type="Marker3D" parent="Attachable"]
+script = ExtResource("6_s2nxr")
 
 [node name="Cooking Progess" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

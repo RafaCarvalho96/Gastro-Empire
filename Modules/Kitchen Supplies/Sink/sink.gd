@@ -7,11 +7,11 @@ func _ready():
 
 func _on_interact(player: Player):
 	var player_attachable: Attachable = player.get_meta("attachable")
-	if attachable.hasObjectAttached and not player_attachable.hasObjectAttached:
+	if not attachable.canAttach() and player_attachable.canAttach():
 		attachable.transfer(player_attachable)
 		return
 	 
-	if not attachable.hasObjectAttached and player_attachable.hasObjectAttached:
+	if attachable.canAttach() and not player_attachable.canAttach():
 		player_attachable.transfer(attachable)
 		return
 	

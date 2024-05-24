@@ -13,7 +13,7 @@ func _ready():
 
 
 func _on_interact(player: Player):
-	if player.attachable.hasObjectAttached:
+	if not player.attachable.canAttach():
 		var object = player.attachable.getAttached()
 		if not object is IngredientNode:
 			openGui(player)
@@ -32,7 +32,7 @@ func _on_interact(player: Player):
 
 
 func _on_item_button_pressed(itemId: String):
-	if playerOpen.attachable.hasObjectAttached:
+	if not playerOpen.attachable.canAttach():
 		closeGui()
 		return
 	

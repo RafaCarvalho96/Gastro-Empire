@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://wqnhx35ledfx"]
+[gd_scene load_steps=6 format=3 uid="uid://wqnhx35ledfx"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Plate/plate.gd" id="1_jctwv"]
 [ext_resource type="PackedScene" uid="uid://c0n4o1jqxpyu5" path="res://Assets/Restaurant Models/plate.gltf" id="2_805h6"]
 [ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="3_l2tsg"]
+[ext_resource type="PackedScene" uid="uid://c8gg127ow8ke4" path="res://Modules/Attachable/attachable_point.tscn" id="4_ukcsr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r3csg"]
 size = Vector3(0.650986, 0.506226, 0.660608)
@@ -22,3 +23,5 @@ shape = SubResource("BoxShape3D_r3csg")
 [node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_l2tsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.103315, 0)
 parent = NodePath("..")
+
+[node name="AttachablePoint" parent="Attachable" instance=ExtResource("4_ukcsr")]

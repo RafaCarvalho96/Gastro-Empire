@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://buwpp3mwa7wm3"]
+[gd_scene load_steps=8 format=3 uid="uid://buwpp3mwa7wm3"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Counter/counter.gd" id="1_a3svp"]
 [ext_resource type="PackedScene" uid="uid://doiwuyoc2qlw1" path="res://Assets/Restaurant Models/kitchencounter_straight_A.gltf" id="1_j5fx2"]
 [ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="2_lyluv"]
+[ext_resource type="Script" path="res://Modules/Attachable/attachable_point.gd" id="4_eym3m"]
 [ext_resource type="Script" path="res://Modules/InteractiveArea/interactive_area.gd" id="4_nih1d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ypdhb"]
@@ -25,6 +26,9 @@ shape = SubResource("BoxShape3D_ypdhb")
 [node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_lyluv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00762, 0)
 parent = NodePath("..")
+
+[node name="AttachablePoint" type="Marker3D" parent="Attachable"]
+script = ExtResource("4_eym3m")
 
 [node name="InteractableArea" type="Area3D" parent="." node_paths=PackedStringArray("parent")]
 priority = 1

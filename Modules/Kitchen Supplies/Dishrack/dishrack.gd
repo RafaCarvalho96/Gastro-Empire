@@ -1,10 +1,7 @@
 extends Node3D
 class_name Dishrack
 
-@export var attachable1: Attachable
-@export var attachable2: Attachable
-@export var attachable3: Attachable
-@export var attachable4: Attachable
+@export var attachable: Attachable
 @onready var counter_2 = $"../Counter4"
 
 
@@ -12,9 +9,8 @@ var nextAttach: int = 1
 
 func _ready():
 	counter_2.attachable.attach(self)
-	attachable1.attach($Plate)
-	attachable2.attach($Plate2)
-	nextAttach = 3
+	attachable.attach($Plate)
+	attachable.attach($Plate2)
 
 
 func _on_interact(player: Player):
@@ -46,13 +42,13 @@ func getPlate(playerAttachable: Attachable, transferIngredient: bool):
 		playerAttachable.deattach()
 	
 	if nextAttach == 2:
-		attachable1.transfer(playerAttachable)
+		attachable.transfer(playerAttachable)
 	elif nextAttach == 3:
-		attachable2.transfer(playerAttachable)
+		attachable.transfer(playerAttachable)
 	elif nextAttach == 4:
-		attachable3.transfer(playerAttachable)
+		attachable.transfer(playerAttachable)
 	elif nextAttach == 5:
-		attachable4.transfer(playerAttachable)
+		attachable.transfer(playerAttachable)
 	nextAttach -= 1
 	
 	if transferIngredient:
@@ -67,11 +63,11 @@ func storePlate(playerAttachable: Attachable):
 		return
 	
 	if nextAttach == 1:
-		playerAttachable.transfer(attachable1)
+		playerAttachable.transfer(attachable)
 	elif nextAttach == 2:
-		playerAttachable.transfer(attachable2)
+		playerAttachable.transfer(attachable)
 	elif nextAttach == 3:
-		playerAttachable.transfer(attachable3)
+		playerAttachable.transfer(attachable)
 	elif nextAttach == 4:
-		playerAttachable.transfer(attachable4)
+		playerAttachable.transfer(attachable)
 	nextAttach += 1

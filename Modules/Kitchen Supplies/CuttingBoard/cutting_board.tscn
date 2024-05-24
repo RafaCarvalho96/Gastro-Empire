@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cb7l5vey7sfit"]
+[gd_scene load_steps=11 format=3 uid="uid://cb7l5vey7sfit"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/CuttingBoard/cutting_board.gd" id="1_40rqv"]
 [ext_resource type="PackedScene" uid="uid://bbiicso1evryk" path="res://Assets/Restaurant Models/cuttingboard.gltf" id="2_ois8o"]
 [ext_resource type="PackedScene" uid="uid://bdrc80k8g2sof" path="res://Modules/InteractiveArea/interactive_area.tscn" id="3_1wmhg"]
 [ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="4_5loa2"]
+[ext_resource type="Script" path="res://Modules/Attachable/attachable_point.gd" id="5_ag2ct"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ndoyw"]
 size = Vector3(1.50073, 0.15387, 1)
@@ -45,6 +46,9 @@ shape = SubResource("BoxShape3D_1lqe1")
 [node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_5loa2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.153243, 0)
 parent = NodePath("..")
+
+[node name="AttachablePoint" type="Marker3D" parent="Attachable"]
+script = ExtResource("5_ag2ct")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
