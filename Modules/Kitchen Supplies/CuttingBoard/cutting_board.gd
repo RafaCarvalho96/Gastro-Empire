@@ -16,29 +16,29 @@ var actionDetail: CookingDetail
 func _ready():
 	counter_2.attachable.attach(self)
 
-func _process(delta):
+func _process(_delta):
 	if isCutting:
 		progress_bar.ratio = 1 - (timer.time_left / totalTimer)
 		
 
 func _on_interact(player: Player):
-	if player.attachable.canAttach() and not attachable.canAttach():
+	if player.attachable.hasAvaliableSlot() and not attachable.hasAvaliableSlot():
 		attachable.transfer(player.attachable)
 		return
-	elif not player.attachable.canAttach() and attachable.canAttach():
+	elif not player.attachable.hasAvaliableSlot() and attachable.hasAvaliableSlot():
 		player.attachable.transfer(attachable)
 		return
 	
-	if not player.attachable.canAttach() and not attachable.canAttach():
+	if not player.attachable.hasAvaliableSlot() and not attachable.hasAvaliableSlot():
 		if player.attachable.getAttached() is Plate and attachable.getAttached() is IngredientNode:
-			if attachable.getAttached().getResource().isPlateable and player.attachable.getAttached().attachable.canAttach():
+			if attachable.getAttached().getResource().isPlateable and player.attachable.getAttached().attachable.hasAvaliableSlot():
 				attachable.transfer(player.attachable.getAttached().attachable)
 		if player.attachable.getAttached() is IngredientNode and attachable.getAttached() is Plate:
-			if player.attachable.getAttached().getResource().isPlateable and attachable.getAttached().attachable.canAttach():
+			if player.attachable.getAttached().getResource().isPlateable and attachable.getAttached().attachable.hasAvaliableSlot():
 				player.attachable.transfer(attachable.getAttached().attachable)
 	
-func _on_start_action(player: Player):
-	if isCutting or attachable.canAttach() or not attachable.getAttached() is IngredientNode:
+func _on_start_action(_player: Player):
+	if isCutting or attachable.hasAvaliableSlot() or not attachable.getAttached() is IngredientNode:
 		return
 	
 	ingredient = attachable.getAttached().getResource()
@@ -49,7 +49,7 @@ func _on_start_action(player: Player):
 	_start_cutting(actionDetail.timer)
 
 
-func _on_stop_action(player: Player):
+func _on_stop_action(_player: Player):
 	if not isCutting:
 		return
 		
@@ -60,7 +60,7 @@ func _on_timer_timeout():
 	if not isCutting:
 		return
 	_stop_cutting()
-	attachable.deattachAndRemove()
+	attachable.deattach(0,true)
 	if actionDetail.result != null:
 		attachable.attach(IngredientManager.getIngredientNode(actionDetail.result.id))
 

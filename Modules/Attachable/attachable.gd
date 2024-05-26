@@ -1,101 +1,92 @@
-class_name Attachable extends Node3D
+extends Node3D
+class_name Attachable
 
-enum ObjectCategories {UTENSIL, PLATE, INGREDIENT, FOOD}
+@export var attachableMode: AttachableMode
+@export var filter: bool = false
+@export var categories: Array[AttachableCategories]
 
-@export var parent: Node3D
-@export var orderned: bool = true
 
-signal attached(object: Node3D,point: int)
-signal deattached(object: Node3D,point: int)
+enum AttachableCategories {UTENSIL, EMPTY_PLATE, PLATE, INGREDIENT}
 
-var points: Dictionary = {}
-var availablePoints: Array[int] = []
-var occupiedPoints: Array[int] = []
-var pointCount: int = 0
-var pointPointer: int = 0
 
 func _ready():
-	if not parent.has_meta("attachable"):
-		parent.set_meta("attachable",self)
-	
-	pointCount = 0
-	for node: Node3D in get_children():
-		if node is AttachablePoint:
-			points[node.seqNumber] = node
-			availablePoints.push_back(node.seqNumber)
-			pointCount += 1
-	availablePoints.sort_custom(sortAsc)
-	
-	for point: AttachablePoint in points.values():
-		point.attached_point.connect(_on_point_attach)
-		point.deattached_point.connect(_on_point_deattach)
+    for child in get_children():
+        if child is AttachableSlot:
+            addSlot(child.seqNumber,child)
 
 
-func sortAsc(a,b):
-	return a<b
+func addSlot(seqNumber: int, slot: AttachableSlot):
+    attachableMode.addSlot(seqNumber,slot)
 
 
-func canAttach(point: int = -1) -> bool:
-	return getPoint(point).canAttach()
+func removeSlot(seqNumber: int):
+    attachableMode.removeSlot(seqNumber)
 
 
-func hasObject(point: int = -1) -> bool:
-	return getPoint(point).hasObject()
+func attach(object: Node3D, seqNumber: int = 0):
+    if isObjectCategoryAllowed(object):
+       attachableMode.attach(object,seqNumber)
+       return true
+    return false
 
 
-func attach(obj: Node3D,point: int = -1):
-	getPoint(point).attach(obj,false)
+func deattach(seqNumber: int = 0, clearNode: bool = false):
+    attachableMode.deattach(seqNumber,clearNode)
 
 
-func transfer(newAttachable: Attachable,point: int = -1):
-	getPoint(point).transfer(newAttachable)
+func transfer(newAttachable: Attachable, seqNumber: int = 0, newSeqNumber: int = 0):
+    attachableMode.transfer(newAttachable,seqNumber,newSeqNumber)
 
 
-func getAttached(point: int = -1) -> Node3D:
-	return getPoint(point).getAttached()
+func getAttached():
+    var slot = getAttachedSlot()
+    if slot == null:
+        return null
+    return getObject(slot)
 
 
-func deattach(point: int = -1):
-	getPoint(point).deattach()
+func getObject(seqNumber: int) -> Node3D:
+    return attachableMode.getObject(seqNumber)
 
 
-func deattachAndRemove(point: int = -1):
-	getPoint(point).deattachAndRemove()
+func hasAvaliableSlot() -> bool:
+    return attachableMode.hasAvaliableSlot()
 
 
-func getPoint(pointSeq: int = -1) -> AttachablePoint:
-	if points.size() < 1:
-		return null
-
-	if orderned or pointSeq == -1:
-		if availablePoints.size() > 0:
-			return points[availablePoints.back()]
-		elif occupiedPoints.size() > 0:
-			return points[occupiedPoints.back()]
-
-	if not points.has(pointSeq):
-		return null
-
-	return points[pointSeq]
+func hasAttachedSlot() -> bool:
+    return attachableMode.hasAttachedSlot()
 
 
-func _on_point_attach(node: Node3D,point: int = -1):
-	if orderned:
-		point = availablePoints.pop_back()
-		occupiedPoints.push_back(point)
-	else:
-		availablePoints.erase(point)
-		occupiedPoints.append(point)
-
-	attached.emit(node,point)
+func isAvaliableSlot(slot: int):
+    return attachableMode.isAvaliableSlot(slot)
 
 
-func _on_point_deattach(node: Node3D,point: int = -1):
-	if orderned:
-		point = occupiedPoints.pop_back()
-		availablePoints.push_back(point)
-	else:
-		occupiedPoints.erase(point)
-		availablePoints.append(point)
+func isAttachedSlot(slot: int):
+    return attachableMode.isAttachedSlot(slot)
 
-	deattached.emit(node,point)
+
+func getAttachedSlot():
+    return attachableMode.getAttachedSlot()
+
+
+func getAvaliableSlot():
+    return attachableMode.getAvaliableSlot()
+
+
+func isObjectCategoryAllowed(object: Node3D):
+    if not filter:
+        return true
+
+    if object is Plate:
+        if categories.has(AttachableCategories.PLATE):
+            return true
+        if categories.has(AttachableCategories.EMPTY_PLATE) and not object.attachable.hasAttachedSlot():
+            return true
+
+    if categories.has(AttachableCategories.INGREDIENT) and object is IngredientNode:
+        return true
+    
+    if categories.has(AttachableCategories.UTENSIL) and (object is Stove or object is Dishrack or object is CuttingBoard):
+        return true
+
+    return false

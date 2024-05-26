@@ -5,17 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://bjigorguvdrqf" path="res://Assets/Restaurant Models/food_ingredient_burger_cooked.gltf" id="2_yiw0t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h8p82"]
-size = Vector3(0.75, 0.23584, 0.75)
+size = Vector3(0.75, 0.199951, 0.75)
 
-[node name="Burger" type="Node3D" node_paths=PackedStringArray("shape")]
+[node name="Burger" type="Node3D"]
 script = ExtResource("1_bx0ch")
 ingredientResource = ExtResource("2_ye3sx")
-shape = NodePath("RigidBody3D/CollisionShape3D")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="."]
 
 [node name="food_ingredient_burger_cooked2" parent="RigidBody3D" instance=ExtResource("2_yiw0t")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11792, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999756, 0)
 shape = SubResource("BoxShape3D_h8p82")

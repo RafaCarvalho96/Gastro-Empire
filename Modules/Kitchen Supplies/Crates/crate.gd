@@ -3,10 +3,12 @@ class_name Crate extends Node3D
 @export var ingredient: Ingredient
 
 func _on_interact(player: Player):
-	if not player.attachable.canAttach():
-		if player.attachable.getAttached() is IngredientNode:
-			if player.attachable.getAttached().getResource().id == ingredient.id:
-				player.attachable.deattachAndRemove()
+	var playerAttachable: Attachable = player.attachable
+	if playerAttachable.hasAttachedSlot():
+		var object: Node3D = playerAttachable.getObject(playerAttachable.getAttachedSlot())
+		if object is IngredientNode:
+			if object.getResource().id == ingredient.id:
+				player.attachable.deattach(0,true)
 		return
 	
 	var ingrObject = IngredientManager.getIngredientNode(ingredient.id)

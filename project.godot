@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 IngredientManager="*res://Modules/Ingredients/ingredient_manager.gd"
-RecipeManager="*res://Modules/Plates/recipe_manager.gd"
+RecipeManager="res://Modules/Plates/recipe_manager.gd"
 
 [dotnet]
 

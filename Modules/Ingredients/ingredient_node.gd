@@ -22,6 +22,7 @@ func getWidth() -> float:
         return shape.size.x
     elif shape is CapsuleShape3D:
         return shape.radius * 2
+    return 0
 
 
 func getHeight() -> float:
@@ -30,6 +31,7 @@ func getHeight() -> float:
         return shape.size.y
     elif shape is CapsuleShape3D:
         return shape.height
+    return 0
 
 
 func getDepth() -> float:
@@ -38,3 +40,4 @@ func getDepth() -> float:
         return shape.size.z
     elif shape is CapsuleShape3D:
         return shape.radius * 2
+    return 0

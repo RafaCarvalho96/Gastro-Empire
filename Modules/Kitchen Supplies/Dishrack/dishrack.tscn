@@ -1,17 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://17732ato5r0a"]
+[gd_scene load_steps=11 format=3 uid="uid://17732ato5r0a"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Dishrack/dishrack.gd" id="1_qj8vq"]
 [ext_resource type="PackedScene" uid="uid://cy08ynqf1xbcq" path="res://Assets/Restaurant Models/dishrack.gltf" id="2_qqawu"]
 [ext_resource type="PackedScene" uid="uid://bdrc80k8g2sof" path="res://Modules/InteractiveArea/interactive_area.tscn" id="3_3vsc4"]
-[ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="4_w4fce"]
-[ext_resource type="PackedScene" uid="uid://c8gg127ow8ke4" path="res://Modules/Attachable/attachable_point.tscn" id="5_3ekuh"]
+[ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="5_jn82m"]
 [ext_resource type="PackedScene" uid="uid://wqnhx35ledfx" path="res://Modules/Kitchen Supplies/Plate/plate.tscn" id="5_mlt2k"]
+[ext_resource type="Script" path="res://Modules/Attachable/mode_stack.gd" id="6_a5o2a"]
+[ext_resource type="PackedScene" uid="uid://dc23rp6ms7on7" path="res://Modules/Attachable/attachable_slot.tscn" id="7_pqmos"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ndoyw"]
 size = Vector3(1.21802, 1.08658, 1.2113)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1lqe1"]
 size = Vector3(1.2, 3, 1.2)
+
+[sub_resource type="Resource" id="Resource_aaprx"]
+resource_local_to_scene = true
+script = ExtResource("6_a5o2a")
 
 [node name="Dishrack" type="Node3D" node_paths=PackedStringArray("attachable")]
 script = ExtResource("1_qj8vq")
@@ -34,24 +39,27 @@ interactivePriority = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133671, 0.720703, -0.0173645)
 shape = SubResource("BoxShape3D_1lqe1")
 
-[node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_w4fce")]
-transform = Transform3D(1, 0, 0, 0, 0.0988855, -0.995099, 0, 0.995099, 0.0988855, 0, 0.658387, -0.409525)
-parent = NodePath("..")
-
-[node name="AttachablePoint" parent="Attachable" instance=ExtResource("5_3ekuh")]
-transform = Transform3D(1, 0, 0, 0, -0.978957, 0.204069, 0, -0.204069, -0.978957, 0, 0.14875, 0.515157)
-
-[node name="AttachablePoint2" parent="Attachable" instance=ExtResource("5_3ekuh")]
-transform = Transform3D(1, 0, 0, 0, -0.978958, 0.204069, 0, -0.204069, -0.978958, 0, 0.328437, 0.533013)
-
-[node name="AttachablePoint3" parent="Attachable" instance=ExtResource("5_3ekuh")]
-transform = Transform3D(1, 0, 0, 0, -0.978958, 0.204069, 0, -0.204069, -0.978958, 0, 0.478265, 0.547902)
-
-[node name="AttachablePoint4" parent="Attachable" instance=ExtResource("5_3ekuh")]
-transform = Transform3D(1, 0, 0, 0, -0.978958, 0.204069, 0, -0.204069, -0.978958, 0, 0.703102, 0.570245)
-
 [node name="Plate" parent="." instance=ExtResource("5_mlt2k")]
-transform = Transform3D(-1, -8.69277e-08, 9.28989e-09, 0, 0.106264, 0.994338, -8.74228e-08, 0.994338, -0.106264, 0, 0.696304, -0.324212)
+transform = Transform3D(1, 0, 0, 0, 0.171207, -0.985235, 0, 0.985235, 0.171207, 0, 0.663629, -0.404138)
 
-[node name="Plate2" parent="." node_paths=PackedStringArray("attachable") instance=ExtResource("5_mlt2k")]
-attachable = NodePath("../Plate/Attachable")
+[node name="Plate2" parent="." instance=ExtResource("5_mlt2k")]
+
+[node name="Attachable" parent="." instance=ExtResource("5_jn82m")]
+attachableMode = SubResource("Resource_aaprx")
+filter = true
+categories = Array[int]([1])
+
+[node name="AttachableSlot" parent="Attachable" instance=ExtResource("7_pqmos")]
+transform = Transform3D(1, 0, 0, 0, 0.171207, -0.985235, 0, 0.985235, 0.171207, 0, 0.663629, -0.404138)
+seqNumber = 3
+
+[node name="AttachableSlot2" parent="Attachable" instance=ExtResource("7_pqmos")]
+transform = Transform3D(1, 0, 0, 0, 0.171207, -0.985235, 0, 0.985235, 0.171207, 0, 0.663629, -0.138702)
+seqNumber = 2
+
+[node name="AttachableSlot3" parent="Attachable" instance=ExtResource("7_pqmos")]
+transform = Transform3D(1, 0, 0, 0, 0.171207, -0.985235, 0, 0.985235, 0.171207, 0, 0.663629, 0.0449741)
+seqNumber = 1
+
+[node name="AttachableSlot4" parent="Attachable" instance=ExtResource("7_pqmos")]
+transform = Transform3D(1, 0, 0, 0, 0.171207, -0.985235, 0, 0.985235, 0.171207, 0, 0.663629, 0.224244)

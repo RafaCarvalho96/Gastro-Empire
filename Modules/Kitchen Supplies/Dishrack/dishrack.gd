@@ -14,22 +14,22 @@ func _ready():
 
 
 func _on_interact(player: Player):
-	if player.attachable.canAttach() and hasPlate():
+	if player.attachable.hasAvaliableSlot() and hasPlate():
 		getPlate(player.attachable, false)
 		return
-	elif not player.attachable.canAttach() and player.attachable.getAttached() is IngredientNode and player.attachable.getAttached().getResource().isPlateable and hasPlate():
+	elif not player.attachable.hasAvaliableSlot() and player.attachable.getAttached() is IngredientNode and player.attachable.getAttached().getResource().isPlateable and hasPlate():
 		getPlate(player.attachable, true)
-	elif not player.attachable.canAttach() and hasSlot():
+	elif not player.attachable.hasAvaliableSlot() and hasSlot():
 		storePlate(player.attachable)
 		return
 
 
 func hasPlate() -> bool:
-	return nextAttach > 1
+	return attachable.hasAttachedSlot()
 
 
 func hasSlot() -> bool:
-	return nextAttach <= 4
+	return attachable.hasAvaliableSlot()
 
 
 func getPlate(playerAttachable: Attachable, transferIngredient: bool):
@@ -41,15 +41,7 @@ func getPlate(playerAttachable: Attachable, transferIngredient: bool):
 		ingredient = playerAttachable.getAttached()
 		playerAttachable.deattach()
 	
-	if nextAttach == 2:
-		attachable.transfer(playerAttachable)
-	elif nextAttach == 3:
-		attachable.transfer(playerAttachable)
-	elif nextAttach == 4:
-		attachable.transfer(playerAttachable)
-	elif nextAttach == 5:
-		attachable.transfer(playerAttachable)
-	nextAttach -= 1
+	attachable.transfer(playerAttachable)
 	
 	if transferIngredient:
 		playerAttachable.getAttached().attachable.attach(ingredient)
@@ -59,15 +51,7 @@ func storePlate(playerAttachable: Attachable):
 	if not hasSlot() or not playerAttachable.getAttached() is Plate:
 		return
 	
-	if playerAttachable.getAttached().attachableCount > 1 or not playerAttachable.getAttached().attachable.canAttach():
+	if playerAttachable.getAttached().attachable.hasAttachedSlot():
 		return
 	
-	if nextAttach == 1:
-		playerAttachable.transfer(attachable)
-	elif nextAttach == 2:
-		playerAttachable.transfer(attachable)
-	elif nextAttach == 3:
-		playerAttachable.transfer(attachable)
-	elif nextAttach == 4:
-		playerAttachable.transfer(attachable)
-	nextAttach += 1
+	playerAttachable.transfer(attachable)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://buwpp3mwa7wm3"]
+[gd_scene load_steps=10 format=3 uid="uid://buwpp3mwa7wm3"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Counter/counter.gd" id="1_a3svp"]
 [ext_resource type="PackedScene" uid="uid://doiwuyoc2qlw1" path="res://Assets/Restaurant Models/kitchencounter_straight_A.gltf" id="1_j5fx2"]
-[ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="2_lyluv"]
-[ext_resource type="Script" path="res://Modules/Attachable/attachable_point.gd" id="4_eym3m"]
+[ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="4_47ucu"]
 [ext_resource type="Script" path="res://Modules/InteractiveArea/interactive_area.gd" id="4_nih1d"]
+[ext_resource type="Script" path="res://Modules/Attachable/mode_queue.gd" id="5_1pbco"]
+[ext_resource type="PackedScene" uid="uid://dc23rp6ms7on7" path="res://Modules/Attachable/attachable_slot.tscn" id="5_pd5vv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ypdhb"]
 size = Vector3(1.99078, 1.00397, 1.97314)
@@ -12,8 +13,13 @@ size = Vector3(1.99078, 1.00397, 1.97314)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lmnpm"]
 size = Vector3(1.98431, 2, 2)
 
-[node name="Counter" type="Node3D"]
+[sub_resource type="Resource" id="Resource_wctv6"]
+resource_local_to_scene = true
+script = ExtResource("5_1pbco")
+
+[node name="Counter" type="Node3D" node_paths=PackedStringArray("attachable")]
 script = ExtResource("1_a3svp")
+attachable = NodePath("Attachable")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -23,13 +29,6 @@ script = ExtResource("1_a3svp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00863647, 0.493256, -0.0178223)
 shape = SubResource("BoxShape3D_ypdhb")
 
-[node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_lyluv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00762, 0)
-parent = NodePath("..")
-
-[node name="AttachablePoint" type="Marker3D" parent="Attachable"]
-script = ExtResource("4_eym3m")
-
 [node name="InteractableArea" type="Area3D" parent="." node_paths=PackedStringArray("parent")]
 priority = 1
 script = ExtResource("4_nih1d")
@@ -38,3 +37,9 @@ parent = NodePath("..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00497437, 0.989685, 0.00244306)
 shape = SubResource("BoxShape3D_lmnpm")
+
+[node name="Attachable" parent="." instance=ExtResource("4_47ucu")]
+attachableMode = SubResource("Resource_wctv6")
+
+[node name="AttachableSlot" parent="Attachable" instance=ExtResource("5_pd5vv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00142, 0)

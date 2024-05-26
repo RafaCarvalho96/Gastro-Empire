@@ -1,27 +1,29 @@
 class_name Counter extends Node3D
 
-@onready var attachable: Attachable = $Attachable
+@export var attachable: Attachable
 
 
 func _ready():
-	pass
+    pass
 
 func _on_interact(player: Player):
-	if attachable.getAttached() is CuttingBoard or attachable.getAttached() is Stove or attachable.getAttached() is Dishrack:
-		return
-	var player_attachable: Attachable = player.get_meta("attachable")
-	if not attachable.canAttach() and player_attachable.canAttach():
-		attachable.transfer(player_attachable)
-		return
+    var obj = attachable.getAttached()
+    if obj is CuttingBoard or obj is Stove or obj is Dishrack:
+        return
+    var player_attachable: Attachable = player.attachable
+    if attachable.hasAttachedSlot() and player_attachable.hasAvaliableSlot():
+        attachable.transfer(player_attachable)
+        return
 	 
-	if attachable.canAttach() and not player_attachable.canAttach():
-		player_attachable.transfer(attachable)
-		return
+    if attachable.hasAvaliableSlot() and player_attachable.hasAttachedSlot():
+        player_attachable.transfer(attachable)
+        return
 	
-	if not player_attachable.canAttach() and not attachable.canAttach():
-		if player_attachable.getAttached() is Plate and attachable.getAttached() is IngredientNode:
-			if attachable.getAttached().getResource().isPlateable and player_attachable.getAttached().attachable.canAttach():
-				attachable.transfer(player_attachable.getAttached().attachable)
-		if player_attachable.getAttached() is IngredientNode and attachable.getAttached() is Plate:
-			if player_attachable.getAttached().getResource().isPlateable and attachable.getAttached().attachable.canAttach():
-				player_attachable.transfer(attachable.getAttached().attachable)
+    if not player_attachable.hasAvaliableSlot() and not attachable.hasAvaliableSlot():
+        var playerObj: Node3D = player_attachable.getAttached()
+        if playerObj is Plate and obj is IngredientNode:
+            if obj.getResource().isPlateable and playerObj.attachable.hasAvaliableSlot():
+                attachable.transfer(playerObj.attachable)
+        if playerObj is IngredientNode and obj is Plate:
+            if playerObj.getResource().isPlateable and obj.attachable.hasAvaliableSlot():
+                player_attachable.transfer(obj.attachable)

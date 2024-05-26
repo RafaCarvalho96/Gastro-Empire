@@ -1,21 +1,23 @@
 class_name Sink extends Node3D
 
-@onready var attachable: Attachable = $Attachable
+@export var attachable: Attachable
+
 
 func _ready():
-	attachable.attach(IngredientManager.getIngredientNode("tomato"))
+	pass
+
 
 func _on_interact(player: Player):
-	var player_attachable: Attachable = player.get_meta("attachable")
-	if not attachable.canAttach() and player_attachable.canAttach():
+	var player_attachable: Attachable = player.attachable
+	if not attachable.hasAvaliableSlot() and player_attachable.hasAvaliableSlot():
 		attachable.transfer(player_attachable)
 		return
 	 
-	if attachable.canAttach() and not player_attachable.canAttach():
+	if attachable.hasAvaliableSlot() and player_attachable.hasAttachedSlot():
 		player_attachable.transfer(attachable)
 		return
 	
-	if not player.attachable.canAttach() and not attachable.canAttach() and player.attachable.getAttached() is Plate:
-		if attachable.getAttached().getResource().isPlateable and player.attachable.getAttached().attachable.canAttach():
-			attachable.transfer(player.attachable.getAttached().attachable)
+	if not player_attachable.hasAvaliableSlot() and not attachable.hasAvaliableSlot() and player_attachable.getAttached() is Plate:
+		if attachable.getAttached().getResource().isPlateable and player_attachable.getAttached().attachable.hasAvaliableSlot():
+			attachable.transfer(player_attachable.getAttached().attachable)
 

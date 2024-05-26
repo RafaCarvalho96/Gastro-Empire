@@ -13,9 +13,11 @@ func _ready():
 
 
 func _on_interact(player: Player):
-	if not player.attachable.canAttach():
-		var object = player.attachable.getAttached()
-		if not object is IngredientNode:
+	var playerAttachable: Attachable = player.attachable
+	if playerAttachable.hasAttachedSlot():
+		var object = playerAttachable.getObject(playerAttachable.getAttachedSlot())
+		
+		if object == null or not object is IngredientNode:
 			openGui(player)
 			return
 		
@@ -25,14 +27,14 @@ func _on_interact(player: Player):
 		
 		var amtReturned = inv.store(object.getResource().id,1)
 		if amtReturned == 0:
-			player.attachable.deattachAndRemove()
+			playerAttachable.deattach(0, true)
 		return
 	else:
 		openGui(player)
 
 
 func _on_item_button_pressed(itemId: String):
-	if not playerOpen.attachable.canAttach():
+	if not playerOpen.attachable.hasAvaliableSlot():
 		closeGui()
 		return
 	

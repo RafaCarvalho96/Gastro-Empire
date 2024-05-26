@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc23rp6ms7on7"]
+
+[ext_resource type="Script" path="res://Modules/Attachable/attachable_slot.gd" id="1_477jy"]
+
+[node name="AttachableSlot" type="Marker3D"]
+script = ExtResource("1_477jy")

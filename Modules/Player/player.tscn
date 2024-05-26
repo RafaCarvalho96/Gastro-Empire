@@ -1,17 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://bu6ql3jn42jg8"]
 
 [ext_resource type="Script" path="res://Modules/Player/Player.gd" id="1_u520q"]
-[ext_resource type="Script" path="res://Modules/Kitchen Supplies/Inventory.gd" id="2_gelqp"]
-[ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="3_l0aov"]
+[ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="3_l0aov"]
 [ext_resource type="Script" path="res://Modules/Player/front_collider.gd" id="4_w5djr"]
+[ext_resource type="Script" path="res://Modules/Attachable/mode_queue.gd" id="5_rc4h1"]
 [ext_resource type="Script" path="res://Modules/Player/camera.gd" id="5_y0g2f"]
-[ext_resource type="Script" path="res://Modules/Attachable/attachable_point.gd" id="5_yoak0"]
-
-[sub_resource type="Resource" id="Resource_fqjw8"]
-script = ExtResource("2_gelqp")
-maxStoredTypes = 1
-maxStoredAmount = 1
-content = {}
+[ext_resource type="PackedScene" uid="uid://dc23rp6ms7on7" path="res://Modules/Attachable/attachable_slot.tscn" id="6_bj6r1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2cnxt"]
 
@@ -26,10 +20,12 @@ material = SubResource("StandardMaterial3D_mi81v")
 [sub_resource type="BoxShape3D" id="BoxShape3D_j5njj"]
 size = Vector3(0.75, 0.5, 1)
 
+[sub_resource type="Resource" id="Resource_qtgh3"]
+script = ExtResource("5_rc4h1")
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("attachable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_u520q")
-inv = SubResource("Resource_fqjw8")
 attachable = NodePath("Pivot/Attachable")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -54,12 +50,11 @@ parent = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0522308, 0.0694885, -0.00842285)
 shape = SubResource("BoxShape3D_j5njj")
 
-[node name="Attachable" parent="Pivot" node_paths=PackedStringArray("parent") instance=ExtResource("3_l0aov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-parent = NodePath("../..")
+[node name="Attachable" parent="Pivot" instance=ExtResource("3_l0aov")]
+attachableMode = SubResource("Resource_qtgh3")
 
-[node name="AttachablePoint" type="Marker3D" parent="Pivot/Attachable"]
-script = ExtResource("5_yoak0")
+[node name="AttachableSlot" parent="Pivot/Attachable" instance=ExtResource("6_bj6r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.11251)
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

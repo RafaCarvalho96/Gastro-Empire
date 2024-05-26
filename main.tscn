@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bu6ql3jn42jg8" path="res://Modules/Player/player.tscn" id="8_w4n64"]
 [ext_resource type="PackedScene" uid="uid://vpnp0wkabunf" path="res://Modules/Kitchen Supplies/Crates/crate_tomato.tscn" id="9_m7lbl"]
 [ext_resource type="PackedScene" uid="uid://djn8kejdlnx38" path="res://Modules/Kitchen Supplies/Stove/stove.tscn" id="9_rmd66"]
-[ext_resource type="PackedScene" uid="uid://cb7l5vey7sfit" path="res://Modules/Kitchen Supplies/CuttingBoard/cutting_board.tscn" id="9_u53b5"]
+[ext_resource type="PackedScene" uid="uid://cjvkk5uohmvgt" path="res://Modules/Kitchen Supplies/CuttingBoard/cutting_board.tscn" id="9_u53b5"]
 [ext_resource type="PackedScene" uid="uid://17732ato5r0a" path="res://Modules/Kitchen Supplies/Dishrack/dishrack.tscn" id="10_5ddqk"]
 [ext_resource type="PackedScene" uid="uid://bbeo8nttobfob" path="res://Modules/Kitchen Supplies/Crates/crate_steak.tscn" id="11_1w8k1"]
 

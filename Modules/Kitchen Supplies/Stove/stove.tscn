@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://djn8kejdlnx38"]
+[gd_scene load_steps=18 format=3 uid="uid://djn8kejdlnx38"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Stove/stove.gd" id="1_eepa6"]
 [ext_resource type="PackedScene" uid="uid://bkvcjxq20t56d" path="res://Assets/Restaurant Models/stove_single_countertop.gltf" id="2_mhbkc"]
 [ext_resource type="PackedScene" uid="uid://bdrc80k8g2sof" path="res://Modules/InteractiveArea/interactive_area.tscn" id="3_l0no5"]
 [ext_resource type="PackedScene" uid="uid://1kbef66141eb" path="res://Assets/Restaurant Models/pan_B.gltf" id="3_oyrag"]
-[ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="4_v1ox7"]
 [ext_resource type="Texture2D" uid="uid://dbnobfn36boij" path="res://icon.svg" id="5_yo4cu"]
-[ext_resource type="Script" path="res://Modules/Attachable/attachable_point.gd" id="6_s2nxr"]
+[ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="6_kj0hb"]
+[ext_resource type="Script" path="res://Modules/Attachable/mode_queue.gd" id="7_ry6kk"]
+[ext_resource type="PackedScene" uid="uid://dc23rp6ms7on7" path="res://Modules/Attachable/attachable_slot.tscn" id="8_q5vs5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ndoyw"]
 size = Vector3(1.50073, 0.280182, 1.75061)
@@ -30,6 +31,10 @@ viewport_path = NodePath("Burning Progess/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bm3xn"]
 bg_color = Color(0.729412, 0.313726, 0, 1)
+
+[sub_resource type="Resource" id="Resource_qsqod"]
+resource_local_to_scene = true
+script = ExtResource("7_ry6kk")
 
 [node name="Stove" type="Node3D" node_paths=PackedStringArray("attachable")]
 script = ExtResource("1_eepa6")
@@ -55,13 +60,6 @@ interactivePriority = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133671, 0.720703, -8.10623e-06)
 shape = SubResource("BoxShape3D_1lqe1")
-
-[node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_v1ox7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345124, 0)
-parent = NodePath("..")
-
-[node name="AttachablePoint" type="Marker3D" parent="Attachable"]
-script = ExtResource("6_s2nxr")
 
 [node name="Cooking Progess" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -122,3 +120,11 @@ offset_bottom = 32.0
 grow_vertical = 2
 texture = ExtResource("5_yo4cu")
 expand_mode = 5
+
+[node name="Attachable" parent="." instance=ExtResource("6_kj0hb")]
+attachableMode = SubResource("Resource_qsqod")
+filter = true
+categories = Array[int]([3])
+
+[node name="AttachableSlot" parent="Attachable" instance=ExtResource("8_q5vs5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.331083, 0)

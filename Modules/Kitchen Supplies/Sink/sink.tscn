@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ps7164kllg8d"]
+[gd_scene load_steps=10 format=3 uid="uid://ps7164kllg8d"]
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Sink/sink.gd" id="1_ppauc"]
 [ext_resource type="PackedScene" uid="uid://dbl6jijpbogl8" path="res://Assets/Restaurant Models/kitchencounter_sink.gltf" id="2_3aa2d"]
 [ext_resource type="Script" path="res://Modules/InteractiveArea/interactive_area.gd" id="3_xda7s"]
-[ext_resource type="PackedScene" uid="uid://bkb5etb2ii1w" path="res://Modules/Attachable/attachable.tscn" id="4_2ho6w"]
-[ext_resource type="Script" path="res://Modules/Attachable/attachable_point.gd" id="5_ptdup"]
+[ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="4_r7b76"]
+[ext_resource type="Script" path="res://Modules/Attachable/mode_queue.gd" id="5_wd3vp"]
+[ext_resource type="PackedScene" uid="uid://dc23rp6ms7on7" path="res://Modules/Attachable/attachable_slot.tscn" id="6_8ak5i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jxpp1"]
 size = Vector3(1.99078, 1, 1.97314)
@@ -12,8 +13,13 @@ size = Vector3(1.99078, 1, 1.97314)
 [sub_resource type="BoxShape3D" id="BoxShape3D_grg81"]
 size = Vector3(1.984, 3, 1.974)
 
-[node name="Sink" type="Node3D"]
+[sub_resource type="Resource" id="Resource_as2pb"]
+resource_local_to_scene = true
+script = ExtResource("5_wd3vp")
+
+[node name="Sink" type="Node3D" node_paths=PackedStringArray("attachable")]
 script = ExtResource("1_ppauc")
+attachable = NodePath("Attachable")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -32,9 +38,8 @@ interactivePriority = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00497437, 1.42108, -0.010437)
 shape = SubResource("BoxShape3D_grg81")
 
-[node name="Attachable" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_2ho6w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73322, 0)
-parent = NodePath("..")
+[node name="Attachable" parent="." instance=ExtResource("4_r7b76")]
+attachableMode = SubResource("Resource_as2pb")
 
-[node name="AttachablePoint" type="Marker3D" parent="Attachable"]
-script = ExtResource("5_ptdup")
+[node name="AttachableSlot" parent="Attachable" instance=ExtResource("6_8ak5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00840439, 0.784988, 0.0589006)
