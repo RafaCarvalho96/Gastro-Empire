@@ -95,6 +95,10 @@ camera_rotate_right={
 ]
 }
 
+[layer_names]
+
+3d_render/layer_5="InteractableObject"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

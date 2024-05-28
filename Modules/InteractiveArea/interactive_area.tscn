@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdrc80k8g2sof"]
-
-[ext_resource type="Script" path="res://Modules/InteractiveArea/interactive_area.gd" id="1_arg4m"]
-
-[node name="InteractableArea" type="Area3D"]
-script = ExtResource("1_arg4m")

@@ -1,4 +1,4 @@
-extends Node3D
+extends Utensil
 class_name Stove
 
 @export var attachable: Attachable

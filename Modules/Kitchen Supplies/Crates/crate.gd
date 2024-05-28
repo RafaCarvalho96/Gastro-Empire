@@ -1,4 +1,4 @@
-class_name Crate extends Node3D
+class_name Crate extends Utensil
 
 @export var ingredient: Ingredient
 

@@ -1,8 +1,6 @@
 class_name InteractableObject
 extends Node3D
 
-@export var parent
-
 
 signal _on_perform_primary_action(player: Player)
 signal _on_start_secondary_action(player: Player)

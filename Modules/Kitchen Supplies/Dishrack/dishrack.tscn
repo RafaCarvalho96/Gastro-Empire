@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Dishrack/dishrack.gd" id="1_qj8vq"]
 [ext_resource type="PackedScene" uid="uid://cy08ynqf1xbcq" path="res://Assets/Restaurant Models/dishrack.gltf" id="2_qqawu"]
-[ext_resource type="PackedScene" uid="uid://bdrc80k8g2sof" path="res://Modules/InteractiveArea/interactive_area.tscn" id="3_3vsc4"]
+[ext_resource type="PackedScene" uid="uid://yt8wddyu2ial" path="res://Modules/Interactable/interactable_object.tscn" id="3_cak08"]
 [ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="5_jn82m"]
 [ext_resource type="PackedScene" uid="uid://wqnhx35ledfx" path="res://Modules/Kitchen Supplies/Plate/plate.tscn" id="5_mlt2k"]
 [ext_resource type="Script" path="res://Modules/Attachable/mode_stack.gd" id="6_a5o2a"]
@@ -12,9 +12,9 @@
 size = Vector3(1.21802, 1.08658, 1.2113)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1lqe1"]
-size = Vector3(1.2, 3, 1.2)
+size = Vector3(2, 3, 2)
 
-[sub_resource type="Resource" id="Resource_aaprx"]
+[sub_resource type="Resource" id="Resource_7qilb"]
 resource_local_to_scene = true
 script = ExtResource("6_a5o2a")
 
@@ -30,12 +30,9 @@ attachable = NodePath("Attachable")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00353974, 0.539932, -0.0105591)
 shape = SubResource("BoxShape3D_ndoyw")
 
-[node name="InteractableArea" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_3vsc4")]
-priority = 6
-parent = NodePath("..")
-interactivePriority = 2
+[node name="InteractableObject" parent="." instance=ExtResource("3_cak08")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133671, 0.720703, -0.0173645)
 shape = SubResource("BoxShape3D_1lqe1")
 
@@ -45,7 +42,7 @@ transform = Transform3D(1, 0, 0, 0, 0.171207, -0.985235, 0, 0.985235, 0.171207, 
 [node name="Plate2" parent="." instance=ExtResource("5_mlt2k")]
 
 [node name="Attachable" parent="." instance=ExtResource("5_jn82m")]
-attachableMode = SubResource("Resource_aaprx")
+attachableMode = SubResource("Resource_7qilb")
 filter = true
 categories = Array[int]([1])
 
@@ -63,3 +60,5 @@ seqNumber = 1
 
 [node name="AttachableSlot4" parent="Attachable" instance=ExtResource("7_pqmos")]
 transform = Transform3D(1, 0, 0, 0, 0.171207, -0.985235, 0, 0.985235, 0.171207, 0, 0.663629, 0.224244)
+
+[connection signal="_on_perform_primary_action" from="InteractableObject" to="." method="_on_interact"]

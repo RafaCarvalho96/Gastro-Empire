@@ -10,8 +10,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var attachable: Attachable
 @onready var camera_pivot = $CameraPivot
 
-var activeArea: InteractiveArea
-
 var sprintCooldown = false
 var sprintActive = false
 

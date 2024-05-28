@@ -62,3 +62,7 @@ class_name Plate
 # 	var recipe = RecipeManager.checkRecipes(self)
 # 	if recipe.length() > 0:
 # 		foodPlate = RecipeManager.getFoodNode(recipe).foodPlateResource
+
+
+func isIngredientAllowed(ingredientId: String) -> bool:
+    return ingredientId != "tomato"

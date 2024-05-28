@@ -1,4 +1,4 @@
-extends Node3D
+extends Utensil
 class_name CuttingBoard
 
 @export var attachable: Attachable

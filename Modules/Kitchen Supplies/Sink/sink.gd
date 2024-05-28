@@ -1,4 +1,4 @@
-class_name Sink extends Node3D
+class_name Sink extends Utensil
 
 @export var attachable: Attachable
 

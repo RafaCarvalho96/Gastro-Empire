@@ -1,4 +1,4 @@
-extends Node3D
+extends Utensil
 class_name Dishrack
 
 @export var attachable: Attachable
@@ -48,7 +48,7 @@ func getPlate(playerAttachable: Attachable, transferIngredient: bool):
 
 
 func storePlate(playerAttachable: Attachable):
-	if not hasSlot() or not playerAttachable.getAttached() is Plate:
+	if not hasSlot() or not attachable.isObjectCategoryAllowed(playerAttachable.getAttached()):
 		return
 	
 	if playerAttachable.getAttached().attachable.hasAttachedSlot():

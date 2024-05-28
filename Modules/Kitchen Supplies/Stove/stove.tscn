@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Stove/stove.gd" id="1_eepa6"]
 [ext_resource type="PackedScene" uid="uid://bkvcjxq20t56d" path="res://Assets/Restaurant Models/stove_single_countertop.gltf" id="2_mhbkc"]
-[ext_resource type="PackedScene" uid="uid://bdrc80k8g2sof" path="res://Modules/InteractiveArea/interactive_area.tscn" id="3_l0no5"]
 [ext_resource type="PackedScene" uid="uid://1kbef66141eb" path="res://Assets/Restaurant Models/pan_B.gltf" id="3_oyrag"]
+[ext_resource type="PackedScene" uid="uid://yt8wddyu2ial" path="res://Modules/Interactable/interactable_object.tscn" id="4_omv5g"]
 [ext_resource type="Texture2D" uid="uid://dbnobfn36boij" path="res://icon.svg" id="5_yo4cu"]
 [ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="6_kj0hb"]
 [ext_resource type="Script" path="res://Modules/Attachable/mode_queue.gd" id="7_ry6kk"]
@@ -13,7 +13,7 @@
 size = Vector3(1.50073, 0.280182, 1.75061)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1lqe1"]
-size = Vector3(1.75, 3, 1.75)
+size = Vector3(2, 3, 2)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5fl67"]
 viewport_path = NodePath("Cooking Progess/SubViewport")
@@ -32,7 +32,7 @@ viewport_path = NodePath("Burning Progess/SubViewport")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bm3xn"]
 bg_color = Color(0.729412, 0.313726, 0, 1)
 
-[sub_resource type="Resource" id="Resource_qsqod"]
+[sub_resource type="Resource" id="Resource_erdho"]
 resource_local_to_scene = true
 script = ExtResource("7_ry6kk")
 
@@ -52,12 +52,9 @@ transform = Transform3D(0.615662, 0, 0.788011, 0, 1, 0, -0.788011, 0, 0.615662, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012207, 0.136734, -0.00213623)
 shape = SubResource("BoxShape3D_ndoyw")
 
-[node name="InteractableArea" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_l0no5")]
-priority = 6
-parent = NodePath("..")
-interactivePriority = 2
+[node name="InteractableObject" parent="." instance=ExtResource("4_omv5g")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableObject"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133671, 0.720703, -8.10623e-06)
 shape = SubResource("BoxShape3D_1lqe1")
 
@@ -122,9 +119,11 @@ texture = ExtResource("5_yo4cu")
 expand_mode = 5
 
 [node name="Attachable" parent="." instance=ExtResource("6_kj0hb")]
-attachableMode = SubResource("Resource_qsqod")
+attachableMode = SubResource("Resource_erdho")
 filter = true
 categories = Array[int]([3])
 
 [node name="AttachableSlot" parent="Attachable" instance=ExtResource("8_q5vs5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.331083, 0)
+
+[connection signal="_on_perform_primary_action" from="InteractableObject" to="." method="_on_interact"]

@@ -1,4 +1,4 @@
-class_name Counter extends Node3D
+class_name Counter extends Utensil
 
 @export var attachable: Attachable
 
