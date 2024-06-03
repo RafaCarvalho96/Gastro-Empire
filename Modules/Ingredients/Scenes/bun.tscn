@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4wd6bnb3k3p"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient_node.gd" id="1_g7rk1"]
+[ext_resource type="Resource" uid="uid://dxolcibnyn1jj" path="res://Modules/Ingredients/Resources/bun.tres" id="2_c5ywf"]
+[ext_resource type="PackedScene" uid="uid://dc87bfw0rifal" path="res://Assets/Restaurant Models/food_ingredient_bun.gltf" id="3_28toi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h8p82"]
+size = Vector3(0.759766, 0.447143, 0.75)
+
+[node name="Bun" type="Node3D" node_paths=PackedStringArray("collisionShape")]
+script = ExtResource("1_g7rk1")
+ingredientResource = ExtResource("2_c5ywf")
+collisionShape = NodePath("RigidBody3D/CollisionShape3D")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+
+[node name="food_ingredient_bun2" parent="RigidBody3D" instance=ExtResource("3_28toi")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.223572, 0)
+shape = SubResource("BoxShape3D_h8p82")

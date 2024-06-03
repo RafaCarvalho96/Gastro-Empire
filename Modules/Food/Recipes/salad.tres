@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://daa8en26px1ar"]
+
+[ext_resource type="Script" path="res://Modules/Food/recipe_transform.gd" id="1_2ewme"]
+[ext_resource type="Script" path="res://Modules/Food/recipe.gd" id="2_xtf4m"]
+
+[sub_resource type="Resource" id="Resource_b1tcs"]
+script = ExtResource("1_2ewme")
+ingredientId = "lettuce_slice"
+variantId = ""
+position = Vector3(-0.08, 0.045, 0)
+rotation = Vector3(0, 0, -9.5)
+scale = Vector3(0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_brvhq"]
+script = ExtResource("1_2ewme")
+ingredientId = "tomato_slice"
+variantId = ""
+position = Vector3(0.12, 0.071, 0.133)
+rotation = Vector3(0, 5.1, -9.9)
+scale = Vector3(0.75, 0.75, 0.75)
+
+[sub_resource type="Resource" id="Resource_ogltn"]
+script = ExtResource("1_2ewme")
+ingredientId = "carrot_pieces"
+variantId = ""
+position = Vector3(0.143, 0.05, -0.179)
+rotation = Vector3(5.1, -156.6, -4.1)
+scale = Vector3(0.75, 0.75, 0.75)
+
+[sub_resource type="Resource" id="Resource_xyh7q"]
+script = ExtResource("1_2ewme")
+ingredientId = "carrot_pieces"
+variantId = ""
+position = Vector3(-0.143, 0.08, -0.179)
+rotation = Vector3(5.1, -156.6, -4.1)
+scale = Vector3(0.75, 0.75, 0.75)
+
+[resource]
+script = ExtResource("2_xtf4m")
+id = "salad"
+ingredientList = Array[String](["lettuce_slice", "tomato_slice", "carrot_pieces"])
+ingredientTransforms = Array[ExtResource("1_2ewme")]([SubResource("Resource_b1tcs"), SubResource("Resource_brvhq"), SubResource("Resource_ogltn"), SubResource("Resource_xyh7q")])

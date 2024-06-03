@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=5 format=3 uid="uid://ieh8g0x086ep"]
+
+[ext_resource type="Resource" uid="uid://yal8qk52mjb7" path="res://Modules/Ingredients/Resources/lettuce_slice.tres" id="1_3rtua"]
+[ext_resource type="Script" path="res://Modules/Ingredients/cooking_detail.gd" id="2_3dd4q"]
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="3_q2sko"]
+
+[sub_resource type="Resource" id="Resource_16sah"]
+script = ExtResource("2_3dd4q")
+action = 0
+timer = 2
+result = ExtResource("1_3rtua")
+burn = false
+
+[resource]
+script = ExtResource("3_q2sko")
+id = "lettuce"
+name = "Alface"
+isPlateable = false
+platePriority = 0
+loadCookingDetails = Array[ExtResource("2_3dd4q")]([SubResource("Resource_16sah")])

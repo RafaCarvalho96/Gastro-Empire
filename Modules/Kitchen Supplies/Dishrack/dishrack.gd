@@ -17,7 +17,7 @@ func _on_interact(player: Player):
 	if player.attachable.hasAvaliableSlot() and hasPlate():
 		getPlate(player.attachable, false)
 		return
-	elif not player.attachable.hasAvaliableSlot() and player.attachable.getAttached() is IngredientNode and player.attachable.getAttached().getResource().isPlateable and hasPlate():
+	elif player.attachable.hasAttachedSlot() and player.attachable.getAttached() is IngredientNode and player.attachable.getAttached().getResource().isPlateable and hasPlate():
 		getPlate(player.attachable, true)
 	elif not player.attachable.hasAvaliableSlot() and hasSlot():
 		storePlate(player.attachable)
@@ -36,15 +36,14 @@ func getPlate(playerAttachable: Attachable, transferIngredient: bool):
 	if not hasPlate():
 		return
 	
-	var ingredient: IngredientNode
+	var ingredientId: String
 	if transferIngredient:
-		ingredient = playerAttachable.getAttached()
-		playerAttachable.deattach()
-	
+		ingredientId = playerAttachable.getAttached().getResource().id
+		var plated = attachable.getAttached().plateIngredient(ingredientId)
+		if not plated:
+			return
+		playerAttachable.deattach(0,true)
 	attachable.transfer(playerAttachable)
-	
-	if transferIngredient:
-		playerAttachable.getAttached().attachable.attach(ingredient)
 
 
 func storePlate(playerAttachable: Attachable):

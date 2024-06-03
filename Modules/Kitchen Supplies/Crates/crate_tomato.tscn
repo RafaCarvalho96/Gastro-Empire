@@ -14,6 +14,7 @@ size = Vector3(2.00543, 2, 1.98926)
 [node name="CrateTomato" type="Node3D"]
 script = ExtResource("1_pgu14")
 ingredient = ExtResource("2_n3i1l")
+category = 5
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

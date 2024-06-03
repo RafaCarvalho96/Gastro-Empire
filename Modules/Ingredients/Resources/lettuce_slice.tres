@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=2 format=3 uid="uid://yal8qk52mjb7"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="1_1ttmc"]
+
+[resource]
+script = ExtResource("1_1ttmc")
+id = "lettuce_slice"
+name = "Folha de Alface"
+isPlateable = true
+platePriority = 0
+loadCookingDetails = Array[Resource("res://Modules/Ingredients/cooking_detail.gd")]([])

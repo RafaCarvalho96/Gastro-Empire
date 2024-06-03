@@ -8,12 +8,12 @@ signal _on_stop_secondary_action(player: Player)
 
 
 func performPrimaryAction(player: Player):
-    _on_perform_primary_action.emit(player)
+	_on_perform_primary_action.emit(player)
 
 
 func startSecondaryAction(player: Player):
-    _on_start_secondary_action.emit(player)
+	_on_start_secondary_action.emit(player)
 
 
 func stopSecondaryAction(player: Player):
-    _on_stop_secondary_action.emit(player)
+	_on_stop_secondary_action.emit(player)

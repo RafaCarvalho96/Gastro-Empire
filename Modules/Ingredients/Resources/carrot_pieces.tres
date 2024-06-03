@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=2 format=3 uid="uid://dr47n3v5rpaha"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="1_gf1vv"]
+
+[resource]
+script = ExtResource("1_gf1vv")
+id = "carrot_pieces"
+name = "Rodelas de Cenoura"
+isPlateable = true
+platePriority = 0
+loadCookingDetails = Array[Resource("res://Modules/Ingredients/cooking_detail.gd")]([])

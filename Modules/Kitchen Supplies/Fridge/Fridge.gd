@@ -13,6 +13,8 @@ func _ready():
 
 
 func _on_interact(player: Player):
+	if isGuiOpen:
+		return
 	var playerAttachable: Attachable = player.attachable
 	if playerAttachable.hasAttachedSlot():
 		var object = playerAttachable.getAttached()
@@ -31,7 +33,7 @@ func _on_interact(player: Player):
 		var amtReturned = inv.store(object.getResource().id,1)
 		if amtReturned == 0:
 			if playerAttachable.getAttached() is Plate:
-				playerAttachable.getAttached().attachable.deattach(0, true)
+				playerAttachable.getAttached().unplate()
 			else:
 				playerAttachable.deattach(0, true)
 		return
@@ -56,18 +58,23 @@ func _on_item_button_pressed(itemId: String):
 		closeGui()
 		return
 		
-	var item = IngredientManager.getIngredientNode(itemId)
+	
 	if plate != null:
-		plate.attachable.attach(item)
+		plate.plateIngredient(itemId)
 	else:
+		var item = IngredientManager.getIngredientNode(itemId)
 		playerOpen.attachable.attach(item)
 	closeGui()
 
 
 func closeGui():
-	isGuiOpen = false
 	playerOpen = null
 	fridge_gui.hide()
+	setGuiClosed.call_deferred()
+
+
+func setGuiClosed():
+	isGuiOpen = false
 
 
 func openGui(player: Player):

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvmrl6ge18vss"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient_node.gd" id="1_ax4pa"]
+[ext_resource type="Resource" uid="uid://dr47n3v5rpaha" path="res://Modules/Ingredients/Resources/carrot_pieces.tres" id="2_f46ab"]
+[ext_resource type="PackedScene" uid="uid://bl5pfidcyhmmd" path="res://Assets/Restaurant Models/food_ingredient_carrot_pieces.gltf" id="3_adry4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h8p82"]
+size = Vector3(0.563911, 0.344377, 0.723877)
+
+[node name="Carrot Pieces" type="Node3D" node_paths=PackedStringArray("collisionShape")]
+script = ExtResource("1_ax4pa")
+ingredientResource = ExtResource("2_f46ab")
+collisionShape = NodePath("RigidBody3D/CollisionShape3D")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+
+[node name="food_ingredient_carrot_pieces2" parent="RigidBody3D" instance=ExtResource("3_adry4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119431, -0.0152814, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00124008, 0.175082, 0.0352783)
+shape = SubResource("BoxShape3D_h8p82")

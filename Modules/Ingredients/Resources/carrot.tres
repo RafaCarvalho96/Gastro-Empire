@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=5 format=3 uid="uid://dlad0n1li57pi"]
+
+[ext_resource type="Resource" uid="uid://dr47n3v5rpaha" path="res://Modules/Ingredients/Resources/carrot_pieces.tres" id="1_8x8w8"]
+[ext_resource type="Script" path="res://Modules/Ingredients/cooking_detail.gd" id="2_7xtlu"]
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="3_bqvpy"]
+
+[sub_resource type="Resource" id="Resource_16sah"]
+script = ExtResource("2_7xtlu")
+action = 0
+timer = 2
+result = ExtResource("1_8x8w8")
+burn = false
+
+[resource]
+script = ExtResource("3_bqvpy")
+id = "carrot"
+name = "Cenoura"
+isPlateable = false
+platePriority = 0
+loadCookingDetails = Array[ExtResource("2_7xtlu")]([SubResource("Resource_16sah")])

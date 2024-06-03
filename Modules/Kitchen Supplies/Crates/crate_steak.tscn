@@ -14,6 +14,7 @@ size = Vector3(2.00543, 2, 1.98926)
 [node name="Crate Steak" type="Node3D"]
 script = ExtResource("1_8mrek")
 ingredient = ExtResource("2_d2hjh")
+category = 5
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

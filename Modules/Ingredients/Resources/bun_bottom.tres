@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=2 format=3 uid="uid://bc2ns0owj5cdv"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient.gd" id="3_fah42"]
+
+[resource]
+script = ExtResource("3_fah42")
+id = "bun_bottom"
+name = "Base do Pão"
+parentIngredient = "bun"
+isPlateable = true
+platePriority = 0
+loadCookingDetails = Array[Resource("res://Modules/Ingredients/cooking_detail.gd")]([])

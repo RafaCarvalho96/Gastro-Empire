@@ -3,6 +3,7 @@ class_name Ingredient
 
 @export var id: String
 @export var name: String
+@export var parentIngredient: String
 @export var icon: ImageTexture
 @export var isPlateable: bool
 @export var platePriority: int = 0

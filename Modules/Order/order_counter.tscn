@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://1prbkwli205y"]
+
+[ext_resource type="Script" path="res://Modules/Order/order_counter.gd" id="1_ih8uv"]
+[ext_resource type="PackedScene" uid="uid://doiwuyoc2qlw1" path="res://Assets/Restaurant Models/kitchencounter_straight_A.gltf" id="2_y555v"]
+[ext_resource type="PackedScene" uid="uid://yt8wddyu2ial" path="res://Modules/Interactable/interactable_object.tscn" id="3_q6pe6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rnf01"]
+size = Vector3(1.99078, 1.00397, 1.97314)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_01ce3"]
+size = Vector3(1.5, 2, 1.5)
+
+[node name="OrderCounter" type="Node3D"]
+script = ExtResource("1_ih8uv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="kitchencounter_straight_A2" parent="StaticBody3D" instance=ExtResource("2_y555v")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00863647, 0.493256, -0.0178223)
+shape = SubResource("BoxShape3D_rnf01")
+
+[node name="InteractableObject" parent="." instance=ExtResource("3_q6pe6")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301901, 0.989685, 0.00244306)
+shape = SubResource("BoxShape3D_01ce3")
+
+[connection signal="_on_perform_primary_action" from="InteractableObject" to="." method="_on_interact"]

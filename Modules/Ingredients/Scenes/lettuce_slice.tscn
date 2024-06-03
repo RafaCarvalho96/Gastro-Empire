@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://py280y7fwoue"]
+
+[ext_resource type="Script" path="res://Modules/Ingredients/ingredient_node.gd" id="1_ep3rr"]
+[ext_resource type="Resource" uid="uid://yal8qk52mjb7" path="res://Modules/Ingredients/Resources/lettuce_slice.tres" id="2_r4sm8"]
+[ext_resource type="PackedScene" uid="uid://fq5uvtuf4s7y" path="res://Assets/Restaurant Models/food_ingredient_lettuce_slice.gltf" id="3_uyp2r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h8p82"]
+size = Vector3(0.806671, 0.101875, 0.75)
+
+[node name="Lettuce" type="Node3D" node_paths=PackedStringArray("collisionShape")]
+script = ExtResource("1_ep3rr")
+ingredientResource = ExtResource("2_r4sm8")
+collisionShape = NodePath("RigidBody3D/CollisionShape3D")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+
+[node name="food_ingredient_lettuce_slice2" parent="RigidBody3D" instance=ExtResource("3_uyp2r")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00138885, 0.012188, 0)
+shape = SubResource("BoxShape3D_h8p82")

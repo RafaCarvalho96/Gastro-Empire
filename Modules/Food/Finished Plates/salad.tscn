@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhn6j1xxtdvrg"]
+
+[ext_resource type="Script" path="res://Modules/Food/finished_plate.gd" id="1_6on38"]
+[ext_resource type="PackedScene" uid="uid://py280y7fwoue" path="res://Modules/Ingredients/Scenes/lettuce_slice.tscn" id="2_0abbw"]
+[ext_resource type="PackedScene" uid="uid://bvmrl6ge18vss" path="res://Modules/Ingredients/Scenes/carrot_pieces.tscn" id="3_u6e5m"]
+[ext_resource type="PackedScene" uid="uid://cfoiiow2onvo4" path="res://Modules/Ingredients/Scenes/tomato_slice.tscn" id="4_evjwq"]
+
+[node name="Salad" type="Node3D"]
+script = ExtResource("1_6on38")
+id = "salad"
+
+[node name="Tomato Slice" parent="." instance=ExtResource("4_evjwq")]
+transform = Transform3D(0.483793, -0.126035, 0.00771934, 0.125961, 0.479565, -0.0644302, 0.00883702, 0.0642865, 0.495771, 0.327583, 0.0689458, -0.0910548)
+
+[node name="Tomato Slice2" parent="." instance=ExtResource("4_evjwq")]
+transform = Transform3D(0.483793, -0.126035, 0.00771934, 0.123593, 0.466386, -0.131185, 0.0258674, 0.128841, 0.482422, 0.327583, 0.0983784, 0.0150256)
+
+[node name="Carrot Pieces" parent="." instance=ExtResource("3_u6e5m")]
+transform = Transform3D(0.102979, 0.113358, -0.988203, -0.254076, 0.963525, 0.0840506, 0.961686, 0.242423, 0.128024, -0.062756, -0.0143498, -0.194563)
+
+[node name="Lettuce" parent="." instance=ExtResource("2_0abbw")]
+transform = Transform3D(1, 0, 0, 0, 0.973912, 0.226924, 0, -0.226924, 0.973912, 0, 0.0654779, 0.115692)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5thf8sce8dwu"]
+
+[ext_resource type="Script" path="res://Modules/Kitchen Supplies/Crates/crate.gd" id="1_4l8lp"]
+[ext_resource type="Resource" uid="uid://dxolcibnyn1jj" path="res://Modules/Ingredients/Resources/bun.tres" id="2_ag2wr"]
+[ext_resource type="PackedScene" uid="uid://dldvmnw11q5ut" path="res://Assets/Restaurant Models/crate_buns.gltf" id="3_gnr7d"]
+[ext_resource type="PackedScene" uid="uid://yt8wddyu2ial" path="res://Modules/Interactable/interactable_object.tscn" id="4_6cr5m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_irt74"]
+size = Vector3(2.03491, 0.907288, 2.01733)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fw0ct"]
+size = Vector3(2.00543, 2, 1.98926)
+
+[node name="Crate Bun" type="Node3D"]
+script = ExtResource("1_4l8lp")
+ingredient = ExtResource("2_ag2wr")
+category = 5
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="crate_buns2" parent="StaticBody3D" instance=ExtResource("3_gnr7d")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00427246, 0.453705, -0.0045166)
+shape = SubResource("BoxShape3D_irt74")
+
+[node name="InteractableObject" parent="." instance=ExtResource("4_6cr5m")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00814819, 1, 0.0161133)
+shape = SubResource("BoxShape3D_fw0ct")
+
+[connection signal="_on_perform_primary_action" from="InteractableObject" to="." method="_on_interact"]

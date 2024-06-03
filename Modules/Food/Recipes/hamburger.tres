@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=6 format=3 uid="uid://dpq4n3fb385y7"]
+
+[ext_resource type="Script" path="res://Modules/Food/recipe.gd" id="1_sq0wq"]
+[ext_resource type="Script" path="res://Modules/Food/recipe_transform.gd" id="1_xljju"]
+
+[sub_resource type="Resource" id="Resource_b1tcs"]
+script = ExtResource("1_xljju")
+ingredientId = "bun"
+variantId = "bun_bottom"
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_brvhq"]
+script = ExtResource("1_xljju")
+ingredientId = "burger"
+variantId = ""
+position = Vector3(0, 0.2, 0)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_ogltn"]
+script = ExtResource("1_xljju")
+ingredientId = "bun"
+variantId = "bun_top"
+position = Vector3(0, 0.4, 0)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(0, 0, 0)
+
+[resource]
+script = ExtResource("1_sq0wq")
+id = "hamburger"
+ingredientList = Array[String](["bun", "burger"])
+ingredientTransforms = Array[ExtResource("1_xljju")]([SubResource("Resource_b1tcs"), SubResource("Resource_brvhq"), SubResource("Resource_ogltn")])

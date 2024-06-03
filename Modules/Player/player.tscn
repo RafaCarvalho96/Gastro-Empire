@@ -20,11 +20,10 @@ material = SubResource("StandardMaterial3D_mi81v")
 [sub_resource type="Resource" id="Resource_qtgh3"]
 script = ExtResource("5_rc4h1")
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("attachable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_u520q")
-attachable = Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":Resource("res://Modules/Attachable/attachable.gd"),"attachableMode":SubResource("Resource_qtgh3"),"filter":false,"categories":Array[int]([]))
-
+attachable = NodePath("Pivot/Attachable")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_2cnxt")

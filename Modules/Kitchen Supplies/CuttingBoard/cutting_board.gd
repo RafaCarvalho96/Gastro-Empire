@@ -31,11 +31,9 @@ func _on_interact(player: Player):
 	
 	if not player.attachable.hasAvaliableSlot() and not attachable.hasAvaliableSlot():
 		if player.attachable.getAttached() is Plate and attachable.getAttached() is IngredientNode:
-			if attachable.getAttached().getResource().isPlateable and player.attachable.getAttached().attachable.hasAvaliableSlot():
-				attachable.transfer(player.attachable.getAttached().attachable)
+			player.attachable.getAttached().plate(attachable)
 		if player.attachable.getAttached() is IngredientNode and attachable.getAttached() is Plate:
-			if player.attachable.getAttached().getResource().isPlateable and attachable.getAttached().attachable.hasAvaliableSlot():
-				player.attachable.transfer(attachable.getAttached().attachable)
+			attachable.getAttached().plate(player.attachable)
 	
 func _on_start_action(_player: Player):
 	if isCutting or attachable.hasAvaliableSlot() or not attachable.getAttached() is IngredientNode:

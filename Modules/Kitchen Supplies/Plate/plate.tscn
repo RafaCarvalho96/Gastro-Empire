@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://Modules/Kitchen Supplies/Plate/plate.gd" id="1_jctwv"]
 [ext_resource type="PackedScene" uid="uid://c0n4o1jqxpyu5" path="res://Assets/Restaurant Models/plate.gltf" id="2_805h6"]
 [ext_resource type="PackedScene" uid="uid://qq470vkvu4mm" path="res://Modules/Attachable/attachable.tscn" id="3_h07ux"]
-[ext_resource type="Script" path="res://Modules/Attachable/mode_queue.gd" id="4_ct44r"]
+[ext_resource type="Script" path="res://Modules/Attachable/mode_fixed.gd" id="4_oxps6"]
 [ext_resource type="PackedScene" uid="uid://dc23rp6ms7on7" path="res://Modules/Attachable/attachable_slot.tscn" id="5_66mgk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r3csg"]
 size = Vector3(0.650986, 0.506226, 0.660608)
 
-[sub_resource type="Resource" id="Resource_xat11"]
+[sub_resource type="Resource" id="Resource_4a1bu"]
 resource_local_to_scene = true
-script = ExtResource("4_ct44r")
+script = ExtResource("4_oxps6")
 
 [node name="Plate" type="Node3D" node_paths=PackedStringArray("attachable")]
 script = ExtResource("1_jctwv")
@@ -26,7 +26,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00246429, 0.247253, 3.52859
 shape = SubResource("BoxShape3D_r3csg")
 
 [node name="Attachable" parent="." instance=ExtResource("3_h07ux")]
-attachableMode = SubResource("Resource_xat11")
+attachableMode = SubResource("Resource_4a1bu")
 
 [node name="AttachableSlot" parent="Attachable" instance=ExtResource("5_66mgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0594884, 0)

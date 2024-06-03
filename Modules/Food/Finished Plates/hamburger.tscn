@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://wmoqian7m4r3"]
+
+[ext_resource type="Script" path="res://Modules/Food/finished_plate.gd" id="1_h1vus"]
+[ext_resource type="PackedScene" uid="uid://c6pc2x7sru2dd" path="res://Modules/Ingredients/Scenes/bun_bottom.tscn" id="3_cg2wb"]
+[ext_resource type="PackedScene" uid="uid://pchl6bm7o6me" path="res://Modules/Ingredients/Scenes/bun_top.tscn" id="4_y3kmv"]
+[ext_resource type="PackedScene" uid="uid://dnl8uy3ctbft2" path="res://Modules/Ingredients/Scenes/burger.tscn" id="5_cdkkv"]
+
+[node name="Hamburger" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+script = ExtResource("1_h1vus")
+id = "hamburger"
+
+[node name="Bun Bottom" parent="." instance=ExtResource("3_cg2wb")]
+
+[node name="Bun Top" parent="." instance=ExtResource("4_y3kmv")]
+transform = Transform3D(0.998235, 0.0593935, 0, -0.0593561, 0.997606, -0.0354925, -0.00210803, 0.0354299, 0.99937, 0, 0.265, 0)
+
+[node name="Burger" parent="." instance=ExtResource("5_cdkkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
